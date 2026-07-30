@@ -68,5 +68,14 @@ namespace Zennolab.CapMonsterCloud.Requests
         /// </summary>
         [JsonProperty("cookieSolution")]
         public bool CookieSolution { get; set; }
+
+        /// <summary>
+        /// Browser's User-Agent which is used in emulation.
+        /// </summary>
+        /// <remarks>
+        /// Pass only the actual User-Agent from Windows OS.
+        /// </remarks>
+        [JsonProperty("userAgent")]
+        public string UserAgent { get; set; }
     }
 }

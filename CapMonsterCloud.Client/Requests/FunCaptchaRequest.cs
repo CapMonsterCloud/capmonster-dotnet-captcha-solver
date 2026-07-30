@@ -54,6 +54,21 @@ namespace Zennolab.CapMonsterCloud.Requests
         public string Data { get; set; }
 
         /// <summary>
+        /// Browser's User-Agent which is used in emulation.
+        /// </summary>
+        /// <remarks>
+        /// Pass only the actual User-Agent from Windows OS.
+        /// </remarks>
+        [JsonProperty("userAgent")]
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// Pass additional cookies in the format: "cookieName1=value1; cookieName2=value2"
+        /// </summary>
+        [JsonProperty("cookies")]
+        public string Cookies { get; set; }
+
+        /// <summary>
         /// Set true if the site only accepts a portion of the tokens from CapMonster Cloud.
         /// https://zenno.link/doc-token-accept-en
         /// </summary>

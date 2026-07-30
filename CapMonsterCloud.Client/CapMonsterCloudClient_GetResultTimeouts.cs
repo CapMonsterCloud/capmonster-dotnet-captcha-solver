@@ -258,6 +258,24 @@ namespace Zennolab.CapMonsterCloud
                         Timeout           = TimeSpan.FromSeconds(180)
                     }
                 },
+                {
+                    typeof(AlibabaCustomTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(120)
+                    }
+                },
+                {
+                    typeof(FriendlyCustomTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(180)
+                    }
+                },
             };
     }
 }

@@ -18,5 +18,14 @@ namespace Zennolab.CapMonsterCloud.Requests
         [JsonProperty("websiteKey", Required = Required.Always)]
         [StringLength(int.MaxValue, MinimumLength = 1)]
         public string WebsiteKey { get; set; }
+
+        /// <summary>
+        /// Initializes TenDI task with required metadata.
+        /// </summary>
+        /// 
+        /// <param name="captchaUrl">
+        /// Link to the captcha script. It usually ends with TCaptcha.js or TCaptcha-global.js. You can find it in the list of requests
+        /// </param>
+        public TenDiCustomTaskRequest(string captchaUrl) => Metadata = new { captchaUrl };
     }
 }

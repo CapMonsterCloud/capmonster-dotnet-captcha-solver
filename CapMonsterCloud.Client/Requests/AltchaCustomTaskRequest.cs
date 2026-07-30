@@ -37,10 +37,10 @@ namespace Zennolab.CapMonsterCloud.Requests
         /// </param>
         /// 
         /// <param name="salt">
-        /// <example>"46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664"</example>
+        /// <example>"46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&amp;codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&amp;expires=1761048664"</example>
         /// Salt obtained from the site, used for hash generation.
         /// Important: Always send the full value of the salt field! If the site returns something like this:
-        /// "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664"
+        /// "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&amp;codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&amp;expires=1761048664"
         /// Then copy and include it in your request exactly as it is, with all characters and parameters (edk, codeChallenge, etc.).
         /// </param>
         /// 

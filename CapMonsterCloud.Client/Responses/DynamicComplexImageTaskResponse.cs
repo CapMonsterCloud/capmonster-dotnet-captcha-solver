@@ -15,6 +15,9 @@ namespace Zennolab.CapMonsterCloud.Responses
         /// </summary>
         public class RecognitionMetadata
         {
+            /// <summary>
+            /// AnswerType
+            /// </summary>
             [JsonProperty("AnswerType")]
             public string AnswerType { get; set; }
         }

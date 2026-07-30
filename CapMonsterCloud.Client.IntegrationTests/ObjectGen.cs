@@ -107,6 +107,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     WebsiteKey = Gen.RandomGuid(),
                     Subdomain = Gen.RandomString(),
                     Data = Gen.RandomString(),
+                    UserAgent = Gen.UserAgent(),
+                    Cookies = Gen.RandomString(),
                     NoCache = Gen.RandomBool(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
@@ -367,6 +369,58 @@ namespace CapMonsterCloud.Client.IntegrationTests
             }
         }
 
+        public static class AlibabaTask
+        {
+            public static AlibabaCustomTaskRequest CreateTask()
+            {
+                return new AlibabaCustomTaskRequest(Gen.RandomString(), Gen.RandomString(),
+                    Gen.RandomGuid(), Gen.RandomGuid(), Gen.RandomString(), Gen.RandomString(), Gen.RandomGuid(), Gen.RandomString())
+                {
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static CaptchaResult<CustomTaskResponse> CreateSolution()
+            {
+                return new CaptchaResult<CustomTaskResponse>
+                {
+                    Error = null,
+                    Solution = new CustomTaskResponse
+                    {
+                        Data = new Dictionary<string, string> { { "token", Gen.RandomString() } }
+                    }
+                };
+            }
+        }
+
+        public static class FriendlyTask
+        {
+            public static FriendlyCustomTaskRequest CreateTask()
+            {
+                return new FriendlyCustomTaskRequest(Gen.RandomUri().ToString())
+                {
+                    WebsiteKey = Gen.RandomString(),
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static CaptchaResult<CustomTaskResponse> CreateSolution()
+            {
+                return new CaptchaResult<CustomTaskResponse>
+                {
+                    Error = null,
+                    Solution = new CustomTaskResponse
+                    {
+                        Data = new Dictionary<string, string> { { "token", Gen.RandomString() } }
+                    }
+                };
+            }
+        }
+
         public static class CustomTask
         {
             public static DataDomeCustomTaskRequest CreateDataDomeTask()
@@ -407,7 +461,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
 
             public static TenDiCustomTaskRequest CreateTenDiTask()
             {
-                return new TenDiCustomTaskRequest
+                return new TenDiCustomTaskRequest(Gen.RandomUri().ToString())
                 {
                     WebsiteKey = Gen.RandomGuid(),
                     WebsiteUrl = Gen.RandomUri().ToString(),
@@ -625,6 +679,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Context = Gen.RandomString(),
                     Iv = Gen.RandomString(),
                     CookieSolution = Gen.RandomBool(),
+                    UserAgent = Gen.UserAgent(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
             }
@@ -751,7 +806,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     WebsiteUrl = Gen.RandomUri().ToString(),
                     WebsiteKey = Gen.RandomString(),
                     UserAgent  = Gen.UserAgent(),
-                    // Enterprise поля по желанию:
                     YidunGetLib = Gen.RandomUri().ToString(),
                     YidunApiServerSubdomain = Gen.RandomString(),
                     Challenge = Gen.RandomString(),
