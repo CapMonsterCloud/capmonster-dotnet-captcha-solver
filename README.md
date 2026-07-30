@@ -1,13 +1,5 @@
 # Zennolab.CapMonsterCloud.Client
 
-> [!IMPORTANT]
-> This repository has been moved and is no longer maintained.
->
-> New repository: [https://github.com/CapMonsterCloud/client-dotnet](https://github.com/CapMonsterCloud/client-dotnet)
->
-> Please update your references and use the new repository for all future development.
-
-
 Official C# client library for [capmonster.cloud](https://capmonster.cloud/) captcha recognition service
 
 ## Installation
