@@ -1,32 +1,52 @@
-# C# Captcha Solver & Anti-Bot Bypass SDK | CapMonster Cloud
+# CapMonster Cloud .NET SDK: C# CAPTCHA Solver & Anti-Bot API Client
 
-[![NuGet Version](https://img.shields.io/nuget/v/Zennolab.CapMonsterCloud.Client.svg?style=flat-square)](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Zennolab.CapMonsterCloud.Client.svg?style=flat-square)](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme">
+    <img src="https://img.shields.io/badge/CapMonster%20Cloud-.NET%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=dotnet&logoColor=white" alt="CapMonster Cloud .NET SDK" height="40">
+  </a>
+</p>
 
-Official C# / .NET client library for the [CapMonster Cloud](https://capmonster.cloud/) automated captcha recognition service. 
+<p align="center">
+  <strong>Official asynchronous C# / .NET client for automated CAPTCHA solving in web scraping, browser automation, and testing workflows.</strong>
+</p>
 
-This SDK empowers developers to easily integrate high-speed, API-based captcha solving into their C#, WPF, and ASP.NET web scraping, automation, and testing projects. We provide seamless bypass for classic captchas (reCAPTCHA, FunCaptcha) as well as complex WAF and anti-bot systems (Cloudflare Turnstile, DataDome, Imperva).
-
-🚀 **[Create an account and get your API Key today!](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)**
-
-## ⚡ Key Features
-- **High Success Rate & Speed:** Solves complex captchas in milliseconds.
-- **WAF Bypass:** Built-in support for DataDome, Cloudflare, Amazon WAF, and more.
-- **Easy Integration:** Ready-to-use C# models for all modern challenge types.
-- **Async/Await Support:** Fully asynchronous API for high-performance, multi-threaded scraping.
+<p align="center">
+  <a href="https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/"><img src="https://img.shields.io/nuget/v/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=blue" alt="NuGet Version"></a>
+  <a href="https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/"><img src="https://img.shields.io/nuget/dt/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=green" alt="NuGet Downloads"></a>
+  <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/stargazers"><img src="https://img.shields.io/github/stars/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square&color=yellow" alt="GitHub Stars"></a>
+  <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/network/members"><img src="https://img.shields.io/github/forks/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square" alt="GitHub Forks"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
+</p>
 
 ---
 
-## ⚙️ Installation
+Official .NET client library for [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme). Integrate automated CAPTCHA recognition into **C#, ASP.NET, WPF, Selenium, and browser automation** projects using an asynchronous API client.
 
-Install the CapMonster Cloud C# client via **NuGet Package Manager**:
+The service supports popular CAPTCHA and anti-bot task types, including **reCAPTCHA v2/v3/Enterprise, Cloudflare Turnstile, GeeTest, DataDome, Amazon WAF, Imperva, and image-to-text tasks**.
 
-```bash
+**[👉 Get your Free API Key & Free Trial Balance on CapMonster Cloud](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)**
+
+---
+
+## ⚡ Highlights
+
+- ⚡ **Async-first API:** Use `async` / `await` through `SolveAsync` for scalable .NET automation.
+- 🧩 **Modern CAPTCHA coverage:** Work with reCAPTCHA, Turnstile, GeeTest, Amazon WAF, DataDome, Imperva, and more.
+- 🌐 **Automation-ready:** Designed for browser automation, scraping, testing, and backend workflows.
+- 🛡️ **Proxy support:** Send proxy settings with task types that require browser-session matching.
+- 📖 **Official API docs:** Supported task specifications and methods are maintained in the CapMonster Cloud documentation.
+
+---
+
+## 📦 Installation
+
+Install via the NuGet Package Manager:
+
+```powershell
 Install-Package Zennolab.CapMonsterCloud.Client
 ```
 
-Or via the **.NET CLI**:
+Or install through the .NET CLI:
 
 ```bash
 dotnet add package Zennolab.CapMonsterCloud.Client
@@ -34,11 +54,11 @@ dotnet add package Zennolab.CapMonsterCloud.Client
 
 ---
 
-## 🚀 Quick Start & Usage Examples
+## 🚀 Quick Start
 
-To start solving captchas, you need a CapMonster Cloud API key. If you don't have one, [register here](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
+### 1. Initialize the Client
 
-### 1. Initialization
+Create an API key in the [CapMonster Cloud Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme), then initialize the client:
 
 ```csharp
 using Zennolab.CapMonsterCloud.Client;
@@ -47,84 +67,117 @@ using Zennolab.CapMonsterCloud.Client.Requests;
 
 var clientOptions = new ClientOptions
 {
-    ClientKey = "<your capmonster.cloud API key>"
+    ClientKey = "YOUR_CAPMONSTER_CLOUD_API_KEY"
 };
 
 var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 ```
 
-### 2. How to Solve reCAPTCHA v2 (With Proxy)
-*Using a proxy is highly recommended for web scraping to avoid IP bans.*
+### 2. Solve reCAPTCHA v2 with a Proxy
 
 ```csharp
-var recaptchaV2ProxyRequest = new RecaptchaV2Request
+var recaptchaV2Request = new RecaptchaV2Request
 {
     WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    Proxy = new ProxyContainer("203.0.113.45", 8080, ProxyType.Http, "login", "password")
+    Proxy = new ProxyContainer(
+        "203.0.113.45",
+        8080,
+        ProxyType.Http,
+        "login",
+        "password")
 };
 
-var recaptchaV2ProxyResult = await cmCloudClient.SolveAsync(recaptchaV2ProxyRequest);
-Console.WriteLine($"Solved Token: {recaptchaV2ProxyResult.Solution.GRecaptchaResponse}");
+var result = await cmCloudClient.SolveAsync(recaptchaV2Request);
+Console.WriteLine($"Solved token: {result.Solution.GRecaptchaResponse}");
 ```
 
-### 3. How to Bypass WAF (e.g., TSPD, DataDome, Castle)
-*For sites protected by advanced anti-bot challenges, use our CustomTask requests.*
+### 3. Submit a Custom WAF Task
+
+Use custom-task request models for supported advanced protection systems. Consult the [supported CAPTCHA task documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme) for required payload fields and the task type that matches your integration.
 
 ```csharp
 var tspdRequest = new TspdCustomTaskRequest(
-    tspdCookie: "TS386a400d029=08...010245; TS386a400d029=08...01a06e; TS386a400d078=08...dbb3b0c; TSd2153684027=08...1944",
+    tspdCookie: "TS386a400d029=...",
     htmlPageBase64: "PCFET0NU...k+PC9odG1sPg==")
 {
     WebsiteUrl = "https://yourwebsite.com/page-with-tspd",
-    Proxy = new ProxyContainer("203.0.113.45", 8080, ProxyType.Http, "login", "password")
+    Proxy = new ProxyContainer(
+        "203.0.113.45",
+        8080,
+        ProxyType.Http,
+        "login",
+        "password")
 };
 
-var tspdResult = await cmCloudClient.SolveAsync(tspdRequest);
+var result = await cmCloudClient.SolveAsync(tspdRequest);
 ```
 
 ---
 
-## 🧩 Supported Captcha Recognition Requests
+## 🛡️ Supported Task Families
 
-Our .NET client supports automated recognition for almost all modern anti-bot challenges. Click on the links below to view detailed documentation for each specific task.
+See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme) for current task parameters, response formats, and API examples.
 
-### Classic Captcha Tasks (Tokens)
-- [AmazonWafRequest](https://zenno.link/doc-amazon-waf) - Amazon WAF Bypass
-- [BinanceTaskRequest](https://zenno.link/doc-binance) - Binance Captcha Solver
-- [FunCaptchaRequest](https://zenno.link/doc-funcaptcha) - Arkose Labs FunCaptcha
-- [GeeTestRequest](https://zenno.link/doc-geetest) - GeeTest v3 & v4
-- [ImageToTextRequest](https://zenno.link/doc-imagetotext) - Standard OCR (Image-to-Text)
-- [MTCaptchaTaskRequest](https://zenno.link/doc-mtcaptcha)
-- [ProsopoTaskRequest](https://zenno.link/doc-prosopo)
-- [RecaptchaV2Request](https://zenno.link/doc-recaptcha2) - Google reCAPTCHA v2
-- [RecaptchaV2EnterpriseRequest](https://zenno.link/doc-recaptcha2e)
-- [RecaptchaV3ProxylessRequest](https://zenno.link/doc-recaptcha3) - Google reCAPTCHA v3
-- [TurnstileRequest - Cloudflare Turnstile](https://zenno.link/doc-cloudflare-turnstile) - Cloudflare Turnstile Solver
-- [TurnstileRequest - Cloudflare Challenge](https://zenno.link/doc-cloudflare-challenge)
-- [TurnstileRequest - Cloudflare Waiting Room](https://zenno.link/doc-cloudflare-waitingroom)
-- [YidunTaskRequest](https://zenno.link/doc-yidun)
+| Task family | Example request classes in this SDK |
+| :--- | :--- |
+| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest`, `RecaptchaV3ProxylessRequest` |
+| **Cloudflare Turnstile** | `TurnstileRequest` |
+| **GeeTest** | `GeeTestRequest` |
+| **Amazon WAF** | `AmazonWafRequest` |
+| **Image-to-Text** | `ImageToTextRequest` |
+| **Complex image tasks** | `RecaptchaComplexImageTaskRequest`, `RecognitionComplexImageTaskRequest` |
+| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, and other supported custom-task classes |
 
-### Custom Tasks (Anti-Bot / WAF / Custom Challenge Systems)
-- [AlibabaCustomTaskRequest](https://zenno.link/doc-customtask-alibaba)
-- [AltchaCustomTaskRequest](https://zenno.link/doc-customtask-altcha)
-- [BasiliskCustomTaskRequest](https://zenno.link/doc-customtask-basilisk)
-- [DataDomeCustomTaskRequest](https://zenno.link/doc-customtask-datadome) - DataDome Slider & Interstitial bypass
-- [FriendlyCustomTaskRequest](https://zenno.link/doc-customtask-friendly)
-- [HuntCustomTaskRequest](https://zenno.link/doc-customtask-hunt)
-- [ImpervaCustomTaskRequest](https://zenno.link/doc-customtask-imperva) - Imperva / Incapsula bypass
-- [TenDiCustomTaskRequest](https://zenno.link/doc-customtask-tendi)
-- [TspdCustomTaskRequest](https://zenno.link/doc-customtask-tspd)
+---
 
-### Complex Image Tasks (Grid / Dynamic Image Selection)
-- [RecaptchaComplexImageTaskRequest](https://zenno.link/doc-complextask-rc)
-- [RecognitionComplexImageTaskRequest](https://zenno.link/doc-complextask-recognition)
+## 🛠️ How It Works
+
+```text
+[ .NET Application / Browser Automation ]
+                    │
+                    ▼
+      [ Create request model with task data ]
+                    │
+                    ▼
+[ CapMonster Cloud .NET SDK ] ──► createTask API request
+                    │
+                    ▼
+      [ SolveAsync polls for task result ]
+                    │
+                    ▼
+[ Receive token / solution ] ──► Use it in your authorized workflow
+```
+
+---
+
+## ⚙️ Best Practices
+
+- **Use the right task type:** Choose the task model that matches the target protection and follow the required parameters in the official documentation.
+- **Keep browser context consistent:** When a task requires a proxy, use a compatible proxy configuration for the associated automation session.
+- **Act on results promptly:** CAPTCHA tokens can expire; submit or inject them immediately after receiving the response.
+- **Check balance and errors:** Use the API methods documentation for `getBalance`, task creation, and task-result handling.
 
 ---
 
 ## 📚 Documentation & Support
 
-For comprehensive guides, advanced scraping techniques, API limits, and error handling, please visit our official documentation:
+- 📖 [Getting Started](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 🧩 [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- ⚙️ [API Methods: createTask, getTaskResult, getBalance](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 🌐 [Browser Extension Guides](https://docs.capmonster.cloud/docs/extension/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 💬 [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
 
-📖 **[CapMonster Cloud Official Documentation](https://docs.capmonster.cloud/)**  
-💬 **[Support / Contact Us](https://capmonster.cloud/)**
+---
+
+## ⭐ Star History
+
+If this SDK helps your automation or testing workflow, please consider giving the repository a star.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=CapMonsterCloud/capmonster-dotnet-captcha-solver&type=Date)](https://star-history.com/#CapMonsterCloud/capmonster-dotnet-captcha-solver&Date)
+
+---
+
+## 📄 License
+
+[MIT](LICENSE) © [ZennoLab](https://zennolab.com/) / [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
