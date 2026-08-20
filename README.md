@@ -15,7 +15,7 @@
   <a href="https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/"><img src="https://img.shields.io/nuget/dt/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=green" alt="NuGet Downloads"></a>
   <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/stargazers"><img src="https://img.shields.io/github/stars/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square&color=yellow" alt="GitHub Stars"></a>
   <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/network/members"><img src="https://img.shields.io/github/forks/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square" alt="GitHub Forks"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
 </p>
 
 ---
@@ -170,14 +170,6 @@ See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/ca
 
 ---
 
-## ⭐ Star History
-
-If this SDK helps your automation or testing workflow, please consider giving the repository a star.
-
-[![Star History Chart](https://api.star-history.com/svg?repos=CapMonsterCloud/capmonster-dotnet-captcha-solver&type=Date)](https://star-history.com/#CapMonsterCloud/capmonster-dotnet-captcha-solver&Date)
-
----
-
 ## 📄 License
 
-[MIT](LICENSE) © [ZennoLab](https://zennolab.com/) / [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+[MIT](./LICENSE) © [ZennoLab](https://zennolab.com/) / [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
