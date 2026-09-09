@@ -70,6 +70,16 @@ namespace Zennolab.CapMonsterCloud
                     }
                 },
                 {
+                    typeof(RecaptchaV3EnterpriseRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        FirstRequestNoCacheDelay = TimeSpan.FromSeconds(10),
+                        RequestsInterval = TimeSpan.FromSeconds(3),
+                        Timeout = TimeSpan.FromSeconds(180)
+                    }
+                },
+                {
                     typeof(ImageToTextRequest),
                     new GetResultTimeouts
                     {

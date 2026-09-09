@@ -21,5 +21,11 @@ namespace Zennolab.CapMonsterCloud.Responses
         /// </summary>
         [JsonProperty("cf_clearance")]
         public string Clearance { get; set; }
+
+        /// <summary>
+        /// User-Agent used while solving.
+        /// </summary>
+        [JsonProperty("userAgent")]
+        public string UserAgent { get; set; }
     }
 }

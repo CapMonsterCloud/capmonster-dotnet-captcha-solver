@@ -26,6 +26,6 @@ namespace Zennolab.CapMonsterCloud.Requests
         /// <param name="captchaUrl">
         /// Link to the captcha script. It usually ends with TCaptcha.js or TCaptcha-global.js. You can find it in the list of requests
         /// </param>
-        public TenDiCustomTaskRequest(string captchaUrl) => Metadata = new { captchaUrl };
+        public TenDiCustomTaskRequest(string captchaUrl = null) => Metadata = new { captchaUrl };
     }
 }

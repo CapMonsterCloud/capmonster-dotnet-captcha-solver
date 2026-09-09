@@ -65,5 +65,11 @@ namespace Zennolab.CapMonsterCloud.Requests
         public bool? NoCache { get; set; }
 
         internal override bool UseNoCache => this.NoCache ?? false;
+
+        /// <summary>
+        /// Set true to solve v3 Enterprise via this task type.
+        /// </summary>
+        [JsonProperty("isEnterprise", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEnterprise { get; set; }
     }
 }

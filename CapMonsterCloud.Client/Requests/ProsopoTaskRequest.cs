@@ -34,5 +34,11 @@ namespace Zennolab.CapMonsterCloud.Requests
         [JsonProperty("websiteKey", Required = Required.Always)]
         [StringLength(int.MaxValue, MinimumLength = 1)]
         public string WebsiteKey { get; set; }
+
+        /// <summary>
+        /// Browser User-Agent. Use a current Windows OS User-Agent supported by CapMonster Cloud.
+        /// </summary>
+        [JsonProperty("userAgent", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserAgent { get; set; }
     }
 }

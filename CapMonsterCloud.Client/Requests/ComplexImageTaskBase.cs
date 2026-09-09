@@ -49,7 +49,7 @@ namespace Zennolab.CapMonsterCloud.Requests
         /// <summary>
         /// Address of a webpage with captcha
         /// </summary>
-        [JsonProperty("websiteURL", Required = Required.Always)]
+        [JsonProperty("websiteURL", NullValueHandling = NullValueHandling.Ignore)]
         [Url]
         public string WebsiteUrl { get; set; }
     }

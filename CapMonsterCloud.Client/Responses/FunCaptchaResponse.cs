@@ -17,5 +17,11 @@ namespace Zennolab.CapMonsterCloud.Responses
         /// </example>
         [JsonProperty("token")]
         public string Value { get; set; }
+
+        /// <summary>
+        /// User-Agent used while solving.
+        /// </summary>
+        [JsonProperty("userAgent")]
+        public string UserAgent { get; set; }
     }
 }

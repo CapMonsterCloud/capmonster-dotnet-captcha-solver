@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Zennolab.CapMonsterCloud.Responses;
+using System.Collections.Generic;
 
 namespace Zennolab.CapMonsterCloud.Requests
 {
@@ -35,6 +36,13 @@ namespace Zennolab.CapMonsterCloud.Requests
             /// </example>
             [JsonProperty("TaskArgument")]
             public string TaskArgument { get; set; }
+
+            /// <summary>
+            /// recognition: payload kind (e.g. "Audio").
+            /// </summary>
+            /// <remarks>Required for: bills_audio (see docs)</remarks>
+            [JsonProperty("PayloadType", NullValueHandling = NullValueHandling.Ignore)]
+            public string PayloadType { get; set; }
         }
 
         /// <summary>
@@ -43,5 +51,17 @@ namespace Zennolab.CapMonsterCloud.Requests
         [JsonProperty("metadata")]
         [Required]
         public RecognitionMetadata Metadata { get; set; }
+
+        /// <summary>
+        /// Optional links to example images.
+        /// </summary>
+        [JsonProperty("exampleImageUrls", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<string> ExampleImageUrls { get; set; }
+
+        /// <summary>
+        /// Optional base64 example images.
+        /// </summary>
+        [JsonProperty("exampleImagesBase64", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<string> ExampleImagesBase64 { get; set; }
     }
 }

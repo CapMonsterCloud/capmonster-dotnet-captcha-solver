@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Zennolab.CapMonsterCloud.Responses;
+using System.Collections.Generic;
 
 namespace Zennolab.CapMonsterCloud.Requests
 {
@@ -65,5 +66,31 @@ namespace Zennolab.CapMonsterCloud.Requests
         public bool? NoCache { get; set; }
 
         internal override bool UseNoCache => this.NoCache ?? false;
+
+        /// <summary>
+        /// Domain to load reCAPTCHA Enterprise from (e.g. www.google.com or www.recaptcha.net).
+        /// </summary>
+        [JsonProperty("apiDomain", NullValueHandling = NullValueHandling.Ignore)]
+        public string ApiDomain { get; set; }
+
+        /// <summary>
+        /// Value of the action parameter sent to Google.
+        /// </summary>
+        /// <example>verify</example>
+        [JsonProperty("pageAction", NullValueHandling = NullValueHandling.Ignore)]
+        public string PageAction { get; set; }
+
+        /// <summary>
+        /// Additional cookies, format: "name1=value1; name2=value2".
+        /// </summary>
+        [JsonProperty("cookies", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(Json.DictionaryToSemicolonSplittedStringConverter))]
+        public IDictionary<string, string> Cookies { get; set; }
+
+        /// <summary>
+        /// Browser User-Agent to emulate. Pass only a current Windows OS UA.
+        /// </summary>
+        [JsonProperty("userAgent", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserAgent { get; set; }
     }
 }

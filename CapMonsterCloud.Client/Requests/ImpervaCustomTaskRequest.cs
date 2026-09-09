@@ -22,6 +22,6 @@
         /// The name of the endpoint where the reese84 fingerprint is sent can be found among the requests and ends with ?d=site.com
         /// 
         /// </summary>
-        public ImpervaCustomTaskRequest(string incapsulaScriptUrl, string incapsulaCookies, string reese84UrlEndpoint) => Metadata = new { incapsulaScriptUrl, incapsulaCookies, reese84UrlEndpoint };
+        public ImpervaCustomTaskRequest(string incapsulaScriptUrl, string incapsulaCookies, string reese84UrlEndpoint = null) => Metadata = new { incapsulaScriptUrl, incapsulaCookies, reese84UrlEndpoint };
     }
 }

@@ -69,5 +69,11 @@ namespace Zennolab.CapMonsterCloud.Requests
         public bool? NoCache { get; set; }
 
         internal override bool UseNoCache => this.NoCache ?? false;
+
+        /// <summary>
+        /// true if the captcha is invisible, i.e. has a hidden field for confirmation, no checkbox. If a bot is suspected, an additional check is called.
+        /// </summary>
+        [JsonProperty("isInvisible", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsInvisible { get; set; }
     }
 }
