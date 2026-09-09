@@ -114,7 +114,9 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     status = "ready",
                     solution = new
                     {
-                        gRecaptchaResponse = expectedResult.Solution.Value
+                        gRecaptchaResponse = expectedResult.Solution.Value,
+                        userAgent = expectedResult.Solution.UserAgent,
+                        cookies = expectedResult.Solution.Cookies
                     },
                     errorId = 0,
                     errorCode = (string)null!
@@ -206,7 +208,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     status = "ready",
                     solution = new
                     {
-                        gRecaptchaResponse = expectedResult.Solution.Value
+                        gRecaptchaResponse = expectedResult.Solution.Value,
+                        userAgent = expectedResult.Solution.UserAgent
                     },
                     errorId = 0,
                     errorCode = (string)null!
@@ -222,6 +225,69 @@ namespace CapMonsterCloud.Client.IntegrationTests
             actual.Should().BeEquivalentTo(expectedResult);
         }
         
+        [Test]
+        public async Task RecaptchaV3Enterprise_ShouldSolve()
+        {
+            var clientKey = Gen.RandomString();
+            var taskId = Gen.RandomInt();
+
+            var captchaRequest = ObjectGen.RecaptchaV3Enterprise.CreateTask();
+            var expectedResult = ObjectGen.RecaptchaV3Enterprise.CreateSolution();
+
+            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
+            {
+                (
+                    Type: RequestType.CreateTask,
+                    ExpectedRequest: JsonConvert.SerializeObject(new
+                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
+                ),
+                (
+                    Type: RequestType.GetTaskResult,
+                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
+                ),
+            };
+
+            var captchaResults = new List<object>
+            {
+                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
+                new
+                {
+                    status = "ready",
+                    solution = new
+                    {
+                        gRecaptchaResponse = expectedResult.Solution.Value,
+                        userAgent = expectedResult.Solution.UserAgent
+                    },
+                    errorId = 0,
+                    errorCode = (string)null!
+                }
+            };
+
+            var sut = new Sut(clientKey);
+            sut.SetupHttpServer(captchaResults);
+
+            var actual = await sut.SolveAsync(captchaRequest);
+
+            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
+            actual.Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
+        public async Task RecaptchaV3Enterprise_IncorrectMinScore_ShouldThrowValidationException()
+        {
+            var clientKey = Gen.RandomString();
+            var captchaRequest = ObjectGen.RecaptchaV3Enterprise.CreateTask(
+                minScore: Gen.RandomBool() ? Gen.RandomDouble(0, 0.09) : Gen.RandomDouble(0.91, 1.5));
+
+            var sut = new Sut(clientKey);
+            sut.SetupHttpServer(new List<object>());
+
+            Func<Task> actual = () => sut.SolveAsync(captchaRequest);
+
+            _ = await actual.Should().ThrowAsync<System.ComponentModel.DataAnnotations.ValidationException>()
+                .WithMessage("*The field MinScore must be between 0?1 and 0?9*");
+        }
+
         [Test]
         public async Task FunCaptcha_ShouldSolve()
         {
@@ -252,7 +318,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     status = "ready",
                     solution = new
                     {
-                        token = expectedResult.Solution.Value
+                        token = expectedResult.Solution.Value,
+                        userAgent = expectedResult.Solution.UserAgent
                     },
                     errorId = 0,
                     errorCode = (string)null!
@@ -400,7 +467,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     solution = new
                     {   
                         token = expectedResult.Solution.Value,
-                        cf_clearance = expectedResult.Solution.Clearance
+                        cf_clearance = expectedResult.Solution.Clearance,
+                        userAgent = expectedResult.Solution.UserAgent
                     },
                     errorId = 0,
                     errorCode = (string)null!
@@ -541,7 +609,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     status = "ready",
                     solution = new
                     {
-                        answer = expectedResult.Solution.Answer
+                        answer = expectedResult.Solution.Answer,
+                        metadata = new { AnswerType = expectedResult.Solution.Metadata.AnswerType }
                     },
                     errorId = 0,
                     errorCode = (string)null!
@@ -681,7 +750,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     status = "ready",
                     solution = new
                     {
-                        answer = expectedResult.Solution.Answer
+                        answer = expectedResult.Solution.Answer,
+                        metadata = new { AnswerType = expectedResult.Solution.Metadata.AnswerType }
                     },
                     errorId = 0,
                     errorCode = (string)null!

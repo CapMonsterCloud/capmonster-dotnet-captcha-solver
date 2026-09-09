@@ -97,5 +97,11 @@ namespace Zennolab.CapMonsterCloud.Requests
         /// </summary>
         [JsonProperty("apiJsUrl")]
         public string ApiJsUrl { get; set; }
+
+        /// <summary>
+        /// Alternative to pageAction accepted by the backend.
+        /// </summary>
+        [JsonProperty("action", NullValueHandling = NullValueHandling.Ignore)]
+        public string Action { get; set; }
     }
 }

@@ -121,7 +121,7 @@ See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/ca
 
 | Task family | Example request classes in this SDK |
 | :--- | :--- |
-| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest`, `RecaptchaV3ProxylessRequest` |
+| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest`, `RecaptchaV3ProxylessRequest`, `RecaptchaV3EnterpriseRequest` |
 | **Cloudflare Turnstile** | `TurnstileRequest` |
 | **GeeTest** | `GeeTestRequest` |
 | **Amazon WAF** | `AmazonWafRequest` |

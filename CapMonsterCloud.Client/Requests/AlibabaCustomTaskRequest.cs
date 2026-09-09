@@ -45,6 +45,12 @@
         /// - apiGetLib: "apiGetLib": "..."
         /// A link to the captcha JS library used by the website. The value is generated on the client side and may change dynamically on each page render.
         ///
+        /// - punishUrl: "punishUrl": "https://example.com/_____tmd_____/punish?x5secdata=...x5step=2"
+        /// Full URL of the verification page for websites where Alibaba triggers verification through a separate /punish URL.
+        ///
+        /// - cookieRequired: "cookieRequired": true
+        /// Set to true to receive cookies together with the CAPTCHA solution (websites that require cookies after verification).
+        ///
         /// </summary>
         public AlibabaCustomTaskRequest(string sceneId,
             string prefix,
@@ -53,7 +59,9 @@
             string verifyType = null,
             string region = null,
             string UserCertifyId = null,
-            string apiGetLib = null)
+            string apiGetLib = null,
+            string punishUrl = null,
+            bool? cookieRequired = null)
             =>
             Metadata = new
             {
@@ -64,7 +72,9 @@
                 verifyType,
                 region,
                 UserCertifyId,
-                apiGetLib
+                apiGetLib,
+                punishUrl,
+                cookieRequired
             };
     }
 }

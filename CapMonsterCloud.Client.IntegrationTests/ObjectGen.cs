@@ -52,6 +52,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     UserAgent = Gen.UserAgent(),
                     Cookies = Gen.ListOfValues(Gen.RandomString).ToDictionary(_ => Gen.RandomString(), value => value),
                     NoCache = Gen.RandomBool(),
+                    IsInvisible = Gen.RandomBool(),
                     Proxy = new ProxyContainer(Gen.RandomString(), proxyPort ?? Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
             }
@@ -64,6 +65,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Solution = new RecaptchaV2Response
                     {
                         Value = Gen.RandomString(),
+                        UserAgent = Gen.UserAgent(),
+                        Cookies = new Dictionary<string, string> { { Gen.RandomString(), Gen.RandomString() } }
                     }
                 };
             }
@@ -75,6 +78,36 @@ namespace CapMonsterCloud.Client.IntegrationTests
                 double? minScore = null)
             {
                 return new RecaptchaV3ProxylessRequest
+                {
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    WebsiteKey = Gen.RandomGuid(),
+                    MinScore = minScore ?? Gen.RandomDouble(0.1, 0.9),
+                    PageAction = Gen.RandomString(),
+                    NoCache = Gen.RandomBool(),
+                    IsEnterprise = Gen.RandomBool()
+                };
+            }
+
+            public static CaptchaResult<RecaptchaV3Response> CreateSolution()
+            {
+                return new CaptchaResult<RecaptchaV3Response>
+                {
+                    Error = null,
+                    Solution = new RecaptchaV3Response
+                    {
+                        Value = Gen.RandomString(),
+                        UserAgent = Gen.UserAgent()
+                    }
+                };
+            }
+        }
+        
+        public static class RecaptchaV3Enterprise
+        {
+            public static RecaptchaV3EnterpriseRequest CreateTask(
+                double? minScore = null)
+            {
+                return new RecaptchaV3EnterpriseRequest
                 {
                     WebsiteUrl = Gen.RandomUri().ToString(),
                     WebsiteKey = Gen.RandomGuid(),
@@ -92,11 +125,12 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Solution = new RecaptchaV3Response
                     {
                         Value = Gen.RandomString(),
+                        UserAgent = Gen.UserAgent()
                     }
                 };
             }
         }
-        
+
         public static class FunCaptcha
         {
             public static FunCaptchaRequest CreateTask()
@@ -122,6 +156,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Solution = new FunCaptchaResponse
                     {
                         Value = Gen.RandomString(),
+                        UserAgent = Gen.UserAgent()
                     }
                 };
             }
@@ -211,6 +246,10 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     WebsiteKey = Gen.RandomString(),
                     EnterprisePayload = Gen.RandomString(),
                     DataSValue = Gen.RandomString(),
+                    ApiDomain = Gen.RandomString(),
+                    PageAction = Gen.RandomString(),
+                    Cookies = Gen.ListOfValues(Gen.RandomString).ToDictionary(_ => Gen.RandomString(), value => value),
+                    UserAgent = Gen.UserAgent(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
             }
@@ -243,6 +282,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     HtmlPageBase64 = Gen.RandomString(),
                     UserAgent = Gen.UserAgent(),
                     ApiJsUrl = Gen.RandomUri().ToString(),
+                    Action = Gen.RandomString(),
                     NoCache = Gen.RandomBool(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
@@ -256,7 +296,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Solution = new TurnstileResponse
                     {
                         Value = Gen.RandomString(),
-                        Clearance = Gen.RandomString()
+                        Clearance = Gen.RandomString(),
+                        UserAgent = Gen.UserAgent()
                     }
                 };
             }
@@ -277,6 +318,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     },
                     ImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
                     ImagesBase64 = Gen.ListOfValues(Gen.RandomString),
+                    ExampleImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
+                    ExampleImagesBase64 = Gen.ListOfValues(Gen.RandomString),
                     UserAgent = Gen.UserAgent()
                 };
             }
@@ -322,10 +365,13 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
                     {
                         Task = Gen.RandomString(),
-                        TaskArgument = Gen.RandomString()
+                        TaskArgument = Gen.RandomString(),
+                        PayloadType = Gen.RandomString()
                     },
                     ImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
                     ImagesBase64 = Gen.ListOfValues(Gen.RandomString),
+                    ExampleImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
+                    ExampleImagesBase64 = Gen.ListOfValues(Gen.RandomString),
                     UserAgent = Gen.UserAgent()
                 };
             }
@@ -338,6 +384,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     Solution = new GridComplexImageTaskResponse
                     {
                         Answer = Gen.ListOfValues(Gen.RandomBool),
+                        Metadata = new DynamicComplexImageTaskResponse.RecognitionMetadata { AnswerType = "Grid" }
                     }
                 };
             }
@@ -374,7 +421,8 @@ namespace CapMonsterCloud.Client.IntegrationTests
             public static AlibabaCustomTaskRequest CreateTask()
             {
                 return new AlibabaCustomTaskRequest(Gen.RandomString(), Gen.RandomString(),
-                    Gen.RandomGuid(), Gen.RandomGuid(), Gen.RandomString(), Gen.RandomString(), Gen.RandomGuid(), Gen.RandomString())
+                    Gen.RandomGuid(), Gen.RandomGuid(), Gen.RandomString(), Gen.RandomString(), Gen.RandomGuid(), Gen.RandomString(),
+                    Gen.RandomUri().ToString(), Gen.RandomBool())
                 {
                     WebsiteUrl = Gen.RandomUri().ToString(),
                     UserAgent = Gen.UserAgent(),
@@ -838,6 +886,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                 {
                     WebsiteUrl = Gen.RandomUri().ToString(),
                     WebsiteKey = Gen.RandomString(),
+                    UserAgent = Gen.UserAgent(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(0, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
                 };
             }

@@ -16,5 +16,11 @@ namespace Zennolab.CapMonsterCloud.Responses
         /// </example>
         [JsonProperty("answer")]
         public ICollection<bool> Answer { get; set; }
+
+        /// <summary>
+        /// Metadata with the answer type, when returned
+        /// </summary>
+        [JsonProperty("metadata")]
+        public DynamicComplexImageTaskResponse.RecognitionMetadata Metadata { get; set; }
     }
 }

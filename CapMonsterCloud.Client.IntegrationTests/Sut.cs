@@ -52,6 +52,9 @@ namespace CapMonsterCloud.Client.IntegrationTests
 
         public async Task<CaptchaResult<RecaptchaV3Response>> SolveAsync (
             RecaptchaV3ProxylessRequest request) => await _cloudClient.SolveAsync(request);
+
+        public async Task<CaptchaResult<RecaptchaV3Response>> SolveAsync (
+            RecaptchaV3EnterpriseRequest request) => await _cloudClient.SolveAsync(request);
         
         public async Task<CaptchaResult<FunCaptchaResponse>> SolveAsync (
             FunCaptchaRequest request) => await _cloudClient.SolveAsync(request);

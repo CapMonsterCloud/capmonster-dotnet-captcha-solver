@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using Zennolab.CapMonsterCloud.Responses;
 
 namespace Zennolab.CapMonsterCloud.Requests
@@ -78,5 +79,17 @@ namespace Zennolab.CapMonsterCloud.Requests
         [JsonProperty("metadata")]
         [Required]
         public RecaptchaMetadata Metadata { get; set; }
+
+        /// <summary>
+        /// Optional links to example images.
+        /// </summary>
+        [JsonProperty("exampleImageUrls", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<string> ExampleImageUrls { get; set; }
+
+        /// <summary>
+        /// Optional base64 example images.
+        /// </summary>
+        [JsonProperty("exampleImagesBase64", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<string> ExampleImagesBase64 { get; set; }
     }
 }
