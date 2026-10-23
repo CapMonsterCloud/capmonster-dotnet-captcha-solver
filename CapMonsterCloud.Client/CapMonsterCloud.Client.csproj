@@ -14,9 +14,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logo.png</PackageIcon>
-    <RepositoryUrl>https://github.com/ZennoLab/capmonstercloud-client-dotnet</RepositoryUrl>
-	  <Version>4.0.0</Version>
-	  <PackageReleaseNotes>FunCaptchaRequest now requires a proxy (login and password stay optional). ProxyContainer no longer accepts port 0. Added optional aidEncrypted to TenDI.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
+	  <Version>4.0.1</Version>
+	  <PackageReleaseNotes>Fixed README rendering on NuGet.org (no code changes).</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

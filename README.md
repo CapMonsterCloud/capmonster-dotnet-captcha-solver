@@ -1,22 +1,14 @@
 # CapMonster Cloud .NET SDK: C# CAPTCHA Solver & Anti-Bot API Client
 
-<p align="center">
-  <a href="https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme">
-    <img src="https://img.shields.io/badge/CapMonster%20Cloud-.NET%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=dotnet&logoColor=white" alt="CapMonster Cloud .NET SDK" height="40">
-  </a>
-</p>
+[![CapMonster Cloud .NET SDK](https://img.shields.io/badge/CapMonster%20Cloud-.NET%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=dotnet&logoColor=white)](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
 
-<p align="center">
-  <strong>Official asynchronous C# / .NET client for automated CAPTCHA solving in web scraping, browser automation, and testing workflows.</strong>
-</p>
+**Official asynchronous C# / .NET client for automated CAPTCHA solving in web scraping, browser automation, and testing workflows.**
 
-<p align="center">
-  <a href="https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/"><img src="https://img.shields.io/nuget/v/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=blue" alt="NuGet Version"></a>
-  <a href="https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/"><img src="https://img.shields.io/nuget/dt/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=green" alt="NuGet Downloads"></a>
-  <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/stargazers"><img src="https://img.shields.io/github/stars/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square&color=yellow" alt="GitHub Stars"></a>
-  <a href="https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/network/members"><img src="https://img.shields.io/github/forks/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square" alt="GitHub Forks"></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
-</p>
+[![NuGet Version](https://img.shields.io/nuget/v/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=blue)](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Zennolab.CapMonsterCloud.Client.svg?style=flat-square&color=green)](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client/)
+[![GitHub Stars](https://img.shields.io/github/stars/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square&color=yellow)](https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/CapMonsterCloud/capmonster-dotnet-captcha-solver?style=flat-square)](https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/blob/main/LICENSE)
 
 ---
 
@@ -179,4 +171,4 @@ See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/ca
 
 ## 📄 License
 
-[MIT](./LICENSE) © [ZennoLab](https://zennolab.com/) / [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+[MIT](https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver/blob/main/LICENSE) © [ZennoLab](https://zennolab.com/) / [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
