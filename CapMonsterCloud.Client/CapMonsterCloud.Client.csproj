@@ -16,7 +16,7 @@
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
     <PackageProjectUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</PackageProjectUrl>
-    <Version>4.0.2</Version>
+    <Version>4.0.3</Version>
     <PackageReleaseNotes>Updated package metadata and README (no code changes).</PackageReleaseNotes>
   </PropertyGroup>
 
