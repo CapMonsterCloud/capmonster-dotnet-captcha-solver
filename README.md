@@ -1,8 +1,8 @@
-# CapMonster Cloud .NET SDK: C# CAPTCHA Solver, Captcha Bypass & Anti-Bot API Client
+# CapMonster Cloud .NET SDK: C# Captcha Solver & Captcha Bypass for reCAPTCHA, Cloudflare Turnstile and GeeTest
 
-> **🔄 Migrating from 2Captcha or Capsolver?** CapMonster Cloud is a fast, cost-effective **2captcha alternative** and **capsolver alternative** for C# and .NET: reCAPTCHA v3 from **$0.90 per 1,000 solves**, which is **up to 38% cheaper than 2Captcha** and **10% cheaper than Capsolver**, with an API response time of **≤ 2 s**. Already have software built for 2Captcha? CapMonster Cloud [supports the 2Captcha API format](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme). Moving your C# code takes just a few lines: see the **Migration examples** below. Full comparison and disclaimer are in the comparison section below.
+> **🔄 Migrating from 2Captcha or Capsolver?** CapMonster Cloud is a fast, cost-effective **2captcha alternative** and **capsolver alternative** for .NET and .NET: reCAPTCHA v3 from **$0.90 per 1,000 solves**, which is **up to 38% cheaper than 2Captcha** and **10% cheaper than Capsolver**, with an API response time of **≤ 2 s**. Already have software built for 2Captcha? CapMonster Cloud [supports the 2Captcha API format](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme). Moving your .NET code takes just a few lines: see the **Migration examples** below. Full comparison and disclaimer are in the comparison section below.
 
-[![CapMonster Cloud .NET SDK](https://img.shields.io/badge/CapMonster%20Cloud-.NET%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=dotnet&logoColor=white)](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+[![CapMonster Cloud .NET SDK - captcha solver and captcha bypass API client](https://img.shields.io/badge/CapMonster%20Cloud-.NET%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=dotnet&logoColor=white)](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
 
 **Official asynchronous C# / .NET client for automated CAPTCHA solving in web scraping, browser automation, and testing workflows.**
 
@@ -24,19 +24,22 @@ Use the SDK for captcha bypass with popular CAPTCHA and anti-bot task types, inc
 
 ## ⚡ Highlights
 
+- ⚡ **Fast solving:** AI-based recognition, on average between 1 and 30 seconds depending on the captcha type.
+- 🤖 **Zero human workers:** 100% automated machine learning pipeline with no manual latencies.
+- 🛡️ **Modern anti-bot bypass:** Full support for Cloudflare Turnstile, reCAPTCHA Enterprise, GeeTest, DataDome, Amazon WAF and Imperva.
 - ⚡ **Async-first API:** Use `async` / `await` through `SolveAsync` for scalable .NET automation.
-- 🧩 **Modern CAPTCHA coverage:** Work with reCAPTCHA, Turnstile, GeeTest, Amazon WAF, DataDome, Imperva, and more.
 - 🌐 **Automation-ready:** Designed for browser automation, scraping, testing, and backend workflows.
 - 🛡️ **Proxy support:** Send proxy settings with task types that require browser-session matching.
-- 📖 **Official API docs:** Supported task specifications and methods are maintained in the CapMonster Cloud documentation.
+- 💰 **Cost-effective:** Low-cost pricing structure based on pay-as-you-go balance.
 - 📉 **Cheaper than alternatives:** reCAPTCHA v3 from $0.90 per 1,000 solves, versus $1.45 at 2Captcha and $1.00 at Capsolver.
 - 🔄 **Easy migration:** replace your 2Captcha or Capsolver solver call and keep the rest of your scraper or bot unchanged.
+- 📖 **Official docs:** request types follow the [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
 ---
 
 ## 📊 CapMonster Cloud vs 2Captcha vs Capsolver
 
-Looking for a 2captcha alternative or a capsolver alternative for C# web scraping and automation? Compare price, speed and success rate.
+Looking for a 2captcha alternative or a capsolver alternative for .NET web scraping and automation? Compare price, speed and success rate.
 
 ### reCAPTCHA v3
 
@@ -79,9 +82,11 @@ Or install through the .NET CLI:
 dotnet add package Zennolab.CapMonsterCloud.Client
 ```
 
+The package targets .NET Standard 2.0.
+
 ---
 
-## 🚀 Quick Start: Solve and Bypass Captchas in C#
+## 🚀 Quick Start: Solve and Bypass Captchas in .NET
 
 ### 1. Initialize the Client
 
@@ -105,7 +110,7 @@ var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 ```csharp
 var recaptchaV2Request = new RecaptchaV2Request
 {
-    WebsiteUrl = "[https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)",
+    WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     Proxy = new ProxyContainer(
         "203.0.113.45",
@@ -128,7 +133,7 @@ var tspdRequest = new TspdCustomTaskRequest(
     tspdCookie: "TS386a400d029=...",
     htmlPageBase64: "PCFET0NU...k+PC9odG1sPg==")
 {
-    WebsiteUrl = "[https://yourwebsite.com/page-with-tspd](https://yourwebsite.com/page-with-tspd)",
+    WebsiteUrl = "https://yourwebsite.com/page-with-tspd",
     Proxy = new ProxyContainer(
         "203.0.113.45",
         8080,
@@ -146,7 +151,7 @@ var result = await cmCloudClient.SolveAsync(tspdRequest);
 
 Already use 2Captcha or Capsolver in your C# scraper or bot? Replace only the solver call and keep the rest of your code unchanged. CapMonster Cloud follows the same flow: send the website URL and sitekey, receive the token.
 
-### Migration from 2Captcha (2captcha-csharp)
+### Before: 2Captcha (2captcha-csharp)
 
 ```csharp
 // Before: 2Captcha
@@ -154,11 +159,15 @@ TwoCaptcha solver = new TwoCaptcha("YOUR_2CAPTCHA_API_KEY");
 
 ReCaptcha captcha = new ReCaptcha();
 captcha.SetSiteKey("YOUR_SITE_KEY");
-captcha.SetUrl("[https://target-website.com/page-with-recaptcha](https://target-website.com/page-with-recaptcha)");
+captcha.SetUrl("https://target-website.com/page-with-recaptcha");
 
 await solver.Solve(captcha);
 var token = captcha.Code;
 ```
+
+### Migrating from Capsolver
+
+CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you call the Capsolver HTTP API directly from .NET, you can switch to the CapMonster Cloud .NET SDK or follow the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
 ### After: CapMonster Cloud
 
@@ -173,7 +182,7 @@ var cmCloudClient = CapMonsterCloudClientFactory.Create(
 
 var request = new RecaptchaV2Request
 {
-    WebsiteUrl = "[https://target-website.com/page-with-recaptcha](https://target-website.com/page-with-recaptcha)",
+    WebsiteUrl = "https://target-website.com/page-with-recaptcha",
     WebsiteKey = "YOUR_SITE_KEY",
     Proxy = new ProxyContainer(
         "203.0.113.45",
@@ -189,21 +198,17 @@ var token = result.Solution.GRecaptchaResponse;
 
 Only the client, the API key and the request class change: the token is used exactly as before, so the rest of your scraper stays the same.
 
-### Migrating from Capsolver
-
-CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you call the Capsolver HTTP API directly from C#, you can switch to the CapMonster Cloud .NET SDK above or follow the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
-
 ### Keep existing 2Captcha-based software
 
 Software that already speaks the 2Captcha API can work with CapMonster Cloud without code changes. See the [guide for connecting other services' APIs](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
 ---
 
-## 🛡️ Supported Task Families: Bypass reCAPTCHA, Cloudflare Turnstile, DataDome, GeeTest & More
+## 🛡️ Supported CAPTCHA Types: Bypass reCAPTCHA, Cloudflare Turnstile, GeeTest and More
 
 Use this C# captcha solver for captcha bypass in web scraping and automation: reCAPTCHA bypass (v2, v2 Enterprise, v3), Cloudflare Turnstile solver, DataDome solver, GeeTest solver, Amazon WAF bypass, Imperva and image-to-text recognition.
 
-See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme) for current task parameters, response formats, and API examples.
+All task types follow the official [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme):
 
 | Task family | Example request classes in this SDK |
 | :--- | :--- |
@@ -221,62 +226,96 @@ See the official [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/ca
 
 ```text
 [ .NET Application / Browser Automation ]
-                    │
-                    ▼
-      [ Create request model with task data ]
-                    │
-                    ▼
+         │
+         ▼
+[ Extract sitekey & website URL ]
+         │
+         ▼
 [ CapMonster Cloud .NET SDK ] ──► createTask API request
-                    │
-                    ▼
-      [ SolveAsync polls for task result ]
-                    │
-                    ▼
-[ Receive token / solution ] ──► Use it in your authorized workflow
+         │
+         ▼
+[ Neural Network Processing ] ──► Poll getTaskResult until the task is ready
+         │
+         ▼
+[ Receive Token & Autosubmit ] ──► Complete bypass
 ```
 
 ---
 
 ## ⚙️ Best Practices
 
-- **Use the right task type:** Choose the task model that matches the target protection and follow the required parameters in the official documentation.
-- **Keep browser context consistent:** When a task requires a proxy, use a compatible proxy configuration for the associated automation session.
-- **Act on results promptly:** CAPTCHA tokens can expire; submit or inject them immediately after receiving the response.
-- **Check balance and errors:** Use the API methods documentation for `getBalance`, task creation, and task-result handling.
+- **Use tokens promptly:** CAPTCHA tokens expire quickly (a reCAPTCHA v2 token is valid for 60 seconds after solving), so submit or inject the solution immediately after receiving the response.
+- **Keep session context consistent:** When a task uses a proxy, use the same proxy in your scraping or browser session and in the CapMonster task.
+- **Use the right task type:** Choose the request type that matches the target protection and follow the required parameters in the [documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
+- **Monitor your balance:** Keep your account balance positive in the [Dashboard](https://dash.capmonster.cloud/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme) and handle API errors in your code.
+
+---
+
+## 💡 Use Cases
+
+- **Web scraping and data collection** from websites you are authorized to access, without manual captcha solving.
+- **Browser automation:** get the solution token in .NET and inject it into the page with your automation tool.
+- **Automated testing (QA)** of your own website and its captcha-protected forms.
+- **Backend services** that need a captcha solving API inside a .NET application.
 
 ---
 
 ## ❓ FAQ
 
-**Is CapMonster Cloud a 2Captcha alternative for C# and .NET?**
+**Is CapMonster Cloud a 2Captcha alternative for .NET?**
 Yes. It is a captcha solving service with an official .NET SDK. For reCAPTCHA v3 it starts at $0.90 per 1,000 solves versus $1.45 at 2Captcha, which is up to 38% cheaper. For Cloudflare Turnstile it starts at $1.30 versus $1.45, which is 10% cheaper.
 
-**Is CapMonster Cloud a Capsolver alternative for C# and .NET?**
+**Is CapMonster Cloud a Capsolver alternative for .NET?**
 Yes. For reCAPTCHA v3 it is 10% cheaper than Capsolver ($0.90 versus $1.00 per 1,000 solves) and shows an API response time of ≤ 2 s versus < 3 s. See the comparison table above and its disclaimer.
 
-**How do I migrate from 2captcha-csharp to CapMonster Cloud?**
+**How do I migrate from 2Captcha or Capsolver to CapMonster Cloud in .NET?**
 Install `Zennolab.CapMonsterCloud.Client`, create a client with `CapMonsterCloudClientFactory.Create`, build the matching request class and call `SolveAsync`. See the migration examples above. Software that already supports the 2Captcha API can also be connected through the [CapMonster Cloud guide](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
-**How do I bypass reCAPTCHA v2 in C#?**
+**Is there an official .NET captcha solver from CapMonster Cloud?**
+Yes. This repository is the official .NET client library for the CapMonster Cloud captcha solving service.
+
+**How do I bypass reCAPTCHA v2 in .NET?**
 Create a client with your API key, build a `RecaptchaV2Request` with the page URL, sitekey and proxy, call `SolveAsync` and use `result.Solution.GRecaptchaResponse`. See the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
-**How do I bypass Cloudflare Turnstile in C#?**
+**How do I bypass Cloudflare Turnstile in .NET?**
 Use `TurnstileRequest` with `SolveAsync`. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
+
+**Which captcha types does the .NET SDK solve?**
+reCAPTCHA v2, v3 and Enterprise, Cloudflare Turnstile, GeeTest, Amazon WAF, DataDome, Imperva, image-to-text and complex image tasks, and other custom-task classes. See the supported types table above and the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
 **How do I get an API key?**
 Register on CapMonster Cloud, top up your balance and copy your API key. The [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme) describes each step.
+
+**Which .NET versions are supported?**
+The package targets .NET Standard 2.0.
+
+**How fast are captchas solved?**
+On average between 1 and 30 seconds, depending on the captcha type. More details are in the [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
+
+**How long is a reCAPTCHA v2 solution valid?**
+According to the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme), the returned token is valid for 60 seconds after the captcha is solved, so use it right away.
+
+**Where is the full API reference?**
+See the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
+
+---
+
+## ⚖️ Responsible Use
+
+CapMonster Cloud is intended for legitimate business purposes only, such as testing your own website or a website you are authorized to test, and recognizing images you provide. Read more about [ethical and transparent captcha automation](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme).
 
 ---
 
 ## 📚 Documentation & Support
 
-- 📖 [Getting Started](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
-- 🧩 [Supported CAPTCHA Types](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
-- ⚙️ [API Methods: createTask, getTaskResult, getBalance](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 📖 [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 🎯 [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- ⚙️ [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- ❓ [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
 - 🌐 [Browser Extension Guides](https://docs.capmonster.cloud/docs/extension/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
-- 💬 [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme)
+- 💬 [Support & Community](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme#support)
 
-## Other official SDKs
+## Other official SDKs & integrations
 
 - [Python](https://github.com/CapMonsterCloud/capmonster-python-captcha-solver)
 - [Node.js](https://github.com/CapMonsterCloud/capmonster-nodejs-captcha-solver)
@@ -285,6 +324,7 @@ Register on CapMonster Cloud, top up your balance and copy your API key. The [Ge
 - [Rust](https://github.com/CapMonsterCloud/capmonster-rust-captcha-solver)
 - [n8n](https://github.com/CapMonsterCloud/capmonster-n8n-captcha-solver)
 - [MCP server](https://github.com/CapMonsterCloud/capmonster-mcp-captcha-solver)
+- [MCP server for Patchright](https://github.com/CapMonsterCloud/capmonster-mcp-patchright-captcha-solver)
 - [API Docs](https://github.com/CapMonsterCloud/capmonster-captcha-solver-docs)
 
 ---
