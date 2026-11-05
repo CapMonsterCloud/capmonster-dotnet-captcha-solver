@@ -248,6 +248,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
                     DataSValue = Gen.RandomString(),
                     ApiDomain = Gen.RandomString(),
                     PageAction = Gen.RandomString(),
+                    MinScore = Gen.RandomDouble(0.1, 0.9),
                     Cookies = Gen.ListOfValues(Gen.RandomString).ToDictionary(_ => Gen.RandomString(), value => value),
                     UserAgent = Gen.UserAgent(),
                     Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
