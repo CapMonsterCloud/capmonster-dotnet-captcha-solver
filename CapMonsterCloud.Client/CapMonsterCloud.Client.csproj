@@ -16,8 +16,8 @@
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
     <PackageProjectUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</PackageProjectUrl>
-    <Version>4.0.3</Version>
-    <PackageReleaseNotes>Updated package metadata and README (no code changes).</PackageReleaseNotes>
+    <Version>4.0.4</Version>
+    <PackageReleaseNotes>Added optional MinScore parameter to RecaptchaV2EnterpriseRequest.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

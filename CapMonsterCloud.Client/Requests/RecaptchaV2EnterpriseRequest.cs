@@ -81,6 +81,13 @@ namespace Zennolab.CapMonsterCloud.Requests
         public string PageAction { get; set; }
 
         /// <summary>
+        /// Minimum acceptable score, from 0.1 to 0.9. Optional.
+        /// </summary>
+        [JsonProperty("minScore", NullValueHandling = NullValueHandling.Ignore)]
+        [Range(0.1, 0.9)]
+        public double? MinScore { get; set; }
+
+        /// <summary>
         /// Additional cookies, format: "name1=value1; name2=value2".
         /// </summary>
         [JsonProperty("cookies", NullValueHandling = NullValueHandling.Ignore)]

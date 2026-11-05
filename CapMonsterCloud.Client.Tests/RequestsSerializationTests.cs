@@ -266,6 +266,41 @@ namespace Zennolab.CapMonsterCloud.Client
         }
 
         [Test]
+        public void RecaptchaV2EnterpriseRequest__ShouldSerialize_WithMinScore([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new RecaptchaV2EnterpriseRequest
+            {
+                WebsiteUrl = "https://example.com/",
+                WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+                PageAction = "login",
+                MinScore = 0.7,
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    type = "RecaptchaV2EnterpriseTask",
+                    websiteURL = target.WebsiteUrl,
+                    websiteKey = target.WebsiteKey,
+                    enterprisePayload = default(string),
+                    recaptchaDataSValue = default(string),
+                    pageAction = target.PageAction,
+                    minScore = target.MinScore,
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
         public void AmazonWafRequest__ShouldSerialize_ChallengeOnly([Values] ProxyType proxyType)
         {
             // Arrange: only the challenge variant, websiteKey/captchaScript/context/iv are optional in the API
