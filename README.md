@@ -212,13 +212,16 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 
 | Task family | Example request classes in this SDK |
 | :--- | :--- |
-| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest`, `RecaptchaV3ProxylessRequest`, `RecaptchaV3EnterpriseRequest` |
+| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest` (optional `MinScore`, 0.1–0.9), `RecaptchaV3ProxylessRequest`, `RecaptchaV3EnterpriseRequest` |
 | **Cloudflare Turnstile** | `TurnstileRequest` |
 | **GeeTest** | `GeeTestRequest` |
+| **FunCaptcha** | `FunCaptchaRequest` |
 | **Amazon WAF** | `AmazonWafRequest` |
+| **Binance CAPTCHA** | `BinanceTaskRequest` |
+| **ARCaptcha** | `ArCaptchaTaskRequest` |
 | **Image-to-Text** | `ImageToTextRequest` |
 | **Complex image tasks** | `RecaptchaComplexImageTaskRequest`, `RecognitionComplexImageTaskRequest` |
-| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, `FengkongCloudCustomTaskRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest`, and other supported custom-task classes |
+| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, `FengkongCloudCustomTaskRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest`, `AltchaCustomTaskRequest`, `AlibabaCustomTaskRequest`, `BasiliskCustomTaskRequest`, `TenDiCustomTaskRequest`, `FriendlyCustomTaskRequest`, `HuntCustomTaskRequest`, `MTCaptchaTaskRequest`, `ProsopoTaskRequest`, `YidunTaskRequest` |
 
 ---
 
