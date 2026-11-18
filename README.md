@@ -119,7 +119,7 @@ var recaptchaV2Request = new RecaptchaV2Request
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(recaptchaV2Request);
+var result = await cmCloudClient.SolveAsync(recaptchaV2Request, CancellationToken.None);
 Console.WriteLine($"Solved token: {result.Solution.GRecaptchaResponse}");
 ```
 
@@ -141,7 +141,7 @@ var tspdRequest = new TspdCustomTaskRequest(
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(tspdRequest);
+var result = await cmCloudClient.SolveAsync(tspdRequest, CancellationToken.None);
 ```
 
 ### 4. Check your balance
@@ -220,7 +220,7 @@ var request = new RecaptchaV2Request
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(request);
+var result = await cmCloudClient.SolveAsync(request, CancellationToken.None);
 var token = result.Solution.GRecaptchaResponse;
 ```
 
@@ -270,6 +270,41 @@ All task types follow the official [CapMonster Cloud API documentation](https://
          ▼
 [ Receive Token & Autosubmit ] ──► Complete bypass
 ```
+
+---
+
+## 🐞 Error Handling
+
+`SolveAsync` does not throw on API errors: it returns a `CaptchaResult<TSolution>` where one of the two properties is set — `Solution` (the typed solution on success) or `Error` (`ErrorType` on failure).
+
+| `ErrorType` | Meaning |
+| :--- | :--- |
+| `Timeout` | Captcha recognition timeout expired before a solution arrived. |
+| `KEY_DOES_NOT_EXIST`, `ZERO_BALANCE`, `IP_BANNED`, `CAPTCHA_UNSOLVABLE`, `TOO_MUCH_REQUESTS`, and similar | API error codes, mapped from the API `errorCode` strings (e.g. `ERROR_ZERO_BALANCE` → `ZERO_BALANCE`). |
+| `Unknown` | An unrecognized API error. |
+
+Other failure modes raise exceptions:
+
+| Exception | Raised when |
+| :--- | :--- |
+| `GetBalanceException` | `GetBalanceAsync` failed. |
+| `CapmonsterCloudClientException` | Base class for client exceptions. |
+| `OperationCanceledException` | The provided `CancellationToken` was cancelled. |
+
+```csharp
+var result = await cmCloudClient.SolveAsync(recaptchaV2Request, CancellationToken.None);
+
+if (result.Error is ErrorType error)
+{
+    Console.WriteLine($"Solve failed: {error}");
+}
+else
+{
+    Console.WriteLine($"Token: {result.Solution.GRecaptchaResponse}");
+}
+```
+
+**Polling and timeouts.** The client polls `getTaskResult` automatically with per-captcha-type settings (delay before the first request, polling interval, maximum waiting time — up to 180 seconds for token tasks). If no solution arrives in time, `SolveAsync` returns `ErrorType.Timeout`. Unsolved tasks are not charged.
 
 ---
 
