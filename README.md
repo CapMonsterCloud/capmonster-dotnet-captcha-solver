@@ -93,9 +93,8 @@ The package targets .NET Standard 2.0.
 Create an API key in the [CapMonster Cloud Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme), then initialize the client:
 
 ```csharp
-using Zennolab.CapMonsterCloud.Client;
-using Zennolab.CapMonsterCloud.Client.Options;
-using Zennolab.CapMonsterCloud.Client.Requests;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
 var clientOptions = new ClientOptions
 {
@@ -145,6 +144,36 @@ var tspdRequest = new TspdCustomTaskRequest(
 var result = await cmCloudClient.SolveAsync(tspdRequest);
 ```
 
+### 4. Check your balance
+
+`GetBalanceAsync` returns the account balance in USD:
+
+```csharp
+decimal balance = await cmCloudClient.GetBalanceAsync(CancellationToken.None);
+Console.WriteLine($"Balance: {balance}");
+```
+
+---
+
+## 🔧 Client Configuration
+
+`ClientOptions` (namespace `Zennolab.CapMonsterCloud`) controls how the client connects to the CapMonster Cloud API:
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `ClientKey` | — | **Required.** Your CapMonster Cloud API key from the [Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme). |
+| `ServiceUri` | `https://api.capmonster.cloud` | CapMonster Cloud API endpoint. |
+| `SoftId` | `53` | `softId` sent with every created task; identifies your software in the Dashboard. |
+
+```csharp
+var clientOptions = new ClientOptions
+{
+    ClientKey = "YOUR_CAPMONSTER_CLOUD_API_KEY",
+    ServiceUri = new Uri("https://api.capmonster.cloud"),
+    SoftId = 12345
+};
+```
+
 ---
 
 ## 🔄 Migrating from 2Captcha or Capsolver
@@ -173,9 +202,8 @@ CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you ca
 
 ```csharp
 // After: CapMonster Cloud
-using Zennolab.CapMonsterCloud.Client;
-using Zennolab.CapMonsterCloud.Client.Options;
-using Zennolab.CapMonsterCloud.Client.Requests;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
 var cmCloudClient = CapMonsterCloudClientFactory.Create(
     new ClientOptions { ClientKey = "YOUR_CAPMONSTER_CLOUD_API_KEY" });
