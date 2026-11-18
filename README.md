@@ -218,7 +218,7 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 | **Amazon WAF** | `AmazonWafRequest` |
 | **Image-to-Text** | `ImageToTextRequest` |
 | **Complex image tasks** | `RecaptchaComplexImageTaskRequest`, `RecognitionComplexImageTaskRequest` |
-| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, and other supported custom-task classes |
+| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, `FengkongCloudCustomTaskRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest`, and other supported custom-task classes |
 
 ---
 

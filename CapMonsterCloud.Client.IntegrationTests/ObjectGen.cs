@@ -532,6 +532,50 @@ namespace CapMonsterCloud.Client.IntegrationTests
                 };
             }
 
+            public static FengkongCloudCustomTaskRequest CreateFengkongCloudTask()
+            {
+                return new FengkongCloudCustomTaskRequest(Gen.RandomUri().ToString())
+                {
+                    WebsiteKey = Gen.RandomString(),
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static HeyTapCustomTaskRequest CreateHeyTapTask()
+            {
+                return new HeyTapCustomTaskRequest(Gen.RandomString())
+                {
+                    WebsiteKey = Gen.RandomString(),
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static ProtonCustomTaskRequest CreateProtonTask()
+            {
+                return new ProtonCustomTaskRequest(Gen.RandomString(), "login")
+                {
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static CaptchaResult<CustomTaskResponse> CreateTokenSolution(string tokenKey)
+            {
+                return new CaptchaResult<CustomTaskResponse>
+                {
+                    Error = null,
+                    Solution = new CustomTaskResponse
+                    {
+                        Data = new Dictionary<string, string> { { tokenKey, Gen.RandomString() } }
+                    }
+                };
+            }
+
             public static BasiliskCustomTaskRequest CreateBasiliskTask()
             {
                 return new BasiliskCustomTaskRequest
@@ -879,6 +923,35 @@ namespace CapMonsterCloud.Client.IntegrationTests
             }
         }
         
+        public static class ArCaptchaTask
+        {
+            public static ArCaptchaTaskRequest CreateTask()
+            {
+                return new ArCaptchaTaskRequest
+                {
+                    WebsiteUrl = Gen.RandomUri().ToString(),
+                    WebsiteKey = Gen.RandomString(),
+                    IsInvisible = true,
+                    UserAgent = Gen.UserAgent(),
+                    Proxy = new ProxyContainer(
+                        Gen.RandomString(), Gen.RandomInt(1, 65535),
+                        Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
+                };
+            }
+
+            public static CaptchaResult<ArCaptchaTaskResponse> CreateSolution()
+            {
+                return new CaptchaResult<ArCaptchaTaskResponse>
+                {
+                    Error = null,
+                    Solution = new ArCaptchaTaskResponse
+                    {
+                        Value = Gen.RandomString(),
+                    }
+                };
+            }
+        }
+
         public static class ProsopoTask
         {
             public static ProsopoTaskRequest CreateTask()

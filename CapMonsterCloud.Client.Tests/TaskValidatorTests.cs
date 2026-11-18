@@ -49,6 +49,40 @@ namespace Zennolab.CapMonsterCloud.Client.Tests
         }
 
         [Test]
+        public void ProtonCustomTaskRequest_WithoutProxy__ShouldFailValidation()
+        {
+            // Arrange
+            var target = new ProtonCustomTaskRequest("YOUR_HUMAN_VERIFICATION_TOKEN", "login")
+            {
+                WebsiteUrl = "https://example.com/"
+            };
+
+            // Act
+            Action actual = () => TaskValidator.ValidateObjectIncludingInternals(target);
+
+            // Assert
+            actual.Should().Throw<AggregateException>()
+                .WithInnerException<ValidationException>();
+        }
+
+        [Test]
+        public void ProtonCustomTaskRequest_WithProxy__ShouldPassValidation([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new ProtonCustomTaskRequest("YOUR_HUMAN_VERIFICATION_TOKEN", "login")
+            {
+                WebsiteUrl = "https://example.com/",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            Action actual = () => TaskValidator.ValidateObjectIncludingInternals(target);
+
+            // Assert
+            actual.Should().NotThrow();
+        }
+
+        [Test]
         public void RequestWithOptionalProxy_WithoutProxy__ShouldPassValidation()
         {
             // Arrange
