@@ -16,8 +16,8 @@
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
     <PackageProjectUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</PackageProjectUrl>
-    <Version>4.0.4</Version>
-    <PackageReleaseNotes>Added optional MinScore parameter to RecaptchaV2EnterpriseRequest.</PackageReleaseNotes>
+    <Version>4.1.0</Version>
+    <PackageReleaseNotes>Added FengkongCloud, ARCaptcha, HeyTap and Proton Captcha task requests. Default getTaskResult timeout raised from 80 to 180 seconds to match the backend.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

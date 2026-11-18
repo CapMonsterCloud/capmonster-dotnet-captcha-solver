@@ -90,6 +90,18 @@ namespace CapMonsterCloud.Client.IntegrationTests
             TenDiCustomTaskRequest request) => await _cloudClient.SolveAsync<CustomTaskResponse>(request);
 
         public async Task<CaptchaResult<CustomTaskResponse>> SolveAsync(
+            FengkongCloudCustomTaskRequest request) => await _cloudClient.SolveAsync<CustomTaskResponse>(request);
+
+        public async Task<CaptchaResult<CustomTaskResponse>> SolveAsync(
+            HeyTapCustomTaskRequest request) => await _cloudClient.SolveAsync<CustomTaskResponse>(request);
+
+        public async Task<CaptchaResult<CustomTaskResponse>> SolveAsync(
+            ProtonCustomTaskRequest request) => await _cloudClient.SolveAsync<CustomTaskResponse>(request);
+
+        public async Task<CaptchaResult<ArCaptchaTaskResponse>> SolveAsync(
+            ArCaptchaTaskRequest request) => await _cloudClient.SolveAsync<ArCaptchaTaskResponse>(request);
+
+        public async Task<CaptchaResult<CustomTaskResponse>> SolveAsync(
             BasiliskCustomTaskRequest request) => await _cloudClient.SolveAsync<CustomTaskResponse>(request);
 
         public async Task<CaptchaResult<BinanceTaskResponse>> SolveAsync(

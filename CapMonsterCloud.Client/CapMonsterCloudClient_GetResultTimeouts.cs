@@ -23,7 +23,7 @@ namespace Zennolab.CapMonsterCloud
             FirstRequestDelay = TimeSpan.FromSeconds(1),
             FirstRequestNoCacheDelay = TimeSpan.FromSeconds(10),
             RequestsInterval = TimeSpan.FromSeconds(1),
-            Timeout = TimeSpan.FromSeconds(80)
+            Timeout = TimeSpan.FromSeconds(180)
         };
 
         private static GetResultTimeouts GetTimeouts(Type type)
@@ -275,6 +275,42 @@ namespace Zennolab.CapMonsterCloud
                         FirstRequestDelay = TimeSpan.FromSeconds(1),
                         RequestsInterval  = TimeSpan.FromSeconds(3),
                         Timeout           = TimeSpan.FromSeconds(120)
+                    }
+                },
+                {
+                    typeof(FengkongCloudCustomTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(180)
+                    }
+                },
+                {
+                    typeof(HeyTapCustomTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(180)
+                    }
+                },
+                {
+                    typeof(ProtonCustomTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(180)
+                    }
+                },
+                {
+                    typeof(ArCaptchaTaskRequest),
+                    new GetResultTimeouts
+                    {
+                        FirstRequestDelay = TimeSpan.FromSeconds(1),
+                        RequestsInterval  = TimeSpan.FromSeconds(3),
+                        Timeout           = TimeSpan.FromSeconds(180)
                     }
                 },
                 {

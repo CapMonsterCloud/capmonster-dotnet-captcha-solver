@@ -641,6 +641,246 @@ namespace Zennolab.CapMonsterCloud.Client
                     proxyPassword = target.ProxyPassword
                 }));
         }
+
+        [Test]
+        public void FengkongCloudCustomTaskRequest__ShouldSerialize_WithoutApiJsUrl([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new FengkongCloudCustomTaskRequest
+            {
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                WebsiteUrl = "https://example.com/",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    @class = "fengkongcloud",
+                    websiteKey = target.WebsiteKey,
+                    type = "CustomTask",
+                    websiteURL = target.WebsiteUrl,
+                    metadata = new
+                    {
+                        apiJsUrl = default(string)
+                    },
+                    userAgent = default(string),
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void FengkongCloudCustomTaskRequest__ShouldSerialize_WithApiJsUrl([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new FengkongCloudCustomTaskRequest(apiJsUrl: "https://example.com/smcp.min.js")
+            {
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                WebsiteUrl = "https://example.com/",
+                UserAgent = "PostmanRuntime/7.29.0",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    @class = "fengkongcloud",
+                    websiteKey = target.WebsiteKey,
+                    type = "CustomTask",
+                    websiteURL = target.WebsiteUrl,
+                    metadata = new
+                    {
+                        apiJsUrl = "https://example.com/smcp.min.js"
+                    },
+                    userAgent = target.UserAgent,
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void HeyTapCustomTaskRequest__ShouldSerialize_WithoutApiServer([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new HeyTapCustomTaskRequest
+            {
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                WebsiteUrl = "https://example.com/",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    @class = "heytap",
+                    websiteKey = target.WebsiteKey,
+                    type = "CustomTask",
+                    websiteURL = target.WebsiteUrl,
+                    metadata = new
+                    {
+                        apiServer = default(string)
+                    },
+                    userAgent = default(string),
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void HeyTapCustomTaskRequest__ShouldSerialize_WithApiServer([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new HeyTapCustomTaskRequest(apiServer: "captcha.example.com")
+            {
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                WebsiteUrl = "https://example.com/",
+                UserAgent = "PostmanRuntime/7.29.0",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    @class = "heytap",
+                    websiteKey = target.WebsiteKey,
+                    type = "CustomTask",
+                    websiteURL = target.WebsiteUrl,
+                    metadata = new
+                    {
+                        apiServer = "captcha.example.com"
+                    },
+                    userAgent = target.UserAgent,
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void ProtonCustomTaskRequest__ShouldSerialize([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new ProtonCustomTaskRequest("YOUR_HUMAN_VERIFICATION_TOKEN", "login")
+            {
+                WebsiteUrl = "https://example.com/",
+                UserAgent = "PostmanRuntime/7.29.0",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    @class = "proton",
+                    type = "CustomTask",
+                    websiteURL = target.WebsiteUrl,
+                    metadata = new
+                    {
+                        HumanVerificationToken = "YOUR_HUMAN_VERIFICATION_TOKEN",
+                        pageAction = "login"
+                    },
+                    userAgent = target.UserAgent,
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void ArCaptchaTaskRequest__ShouldSerialize_WithoutOptionalParameters([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new ArCaptchaTaskRequest
+            {
+                WebsiteUrl = "https://example.com/",
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    type = "ArCaptchaTask",
+                    websiteURL = target.WebsiteUrl,
+                    websiteKey = target.WebsiteKey,
+                    userAgent = default(string),
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
+
+        [Test]
+        public void ArCaptchaTaskRequest__ShouldSerialize_WithIsInvisible([Values] ProxyType proxyType)
+        {
+            // Arrange
+            var target = new ArCaptchaTaskRequest
+            {
+                WebsiteUrl = "https://example.com/",
+                WebsiteKey = "YOUR_WEBSITE_KEY",
+                IsInvisible = true,
+                UserAgent = "PostmanRuntime/7.29.0",
+                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
+            };
+
+            // Act
+            var actual = JsonConvert.SerializeObject(target);
+
+            // Assert
+            actual.Should().Be(JsonConvert.SerializeObject(
+                new
+                {
+                    type = "ArCaptchaTask",
+                    websiteURL = target.WebsiteUrl,
+                    websiteKey = target.WebsiteKey,
+                    isInvisible = true,
+                    userAgent = target.UserAgent,
+                    proxyAddress = target.ProxyAddress,
+                    proxyPort = target.ProxyPort,
+                    proxyType = proxyType.ToString().ToLower(),
+                    proxyLogin = target.ProxyLogin,
+                    proxyPassword = target.ProxyPassword
+                }));
+        }
     }
 }
 
