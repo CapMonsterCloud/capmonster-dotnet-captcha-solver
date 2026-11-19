@@ -152,44 +152,6 @@ namespace Zennolab.CapMonsterCloud.Client
                 }));
         }
 
-        [Test]
-        public void HCaptchaRequest__ShouldSerialize([Values] ProxyType proxyType)
-        {
-            // Arrange
-            var target = new HCaptchaRequest
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-                WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
-                Data = "some data",
-                Cookies = new Dictionary<string, string>
-                {
-                    { "cookieA", "value#A" },
-                    { "cookieB", "value#B" }
-                },
-                Proxy = new ProxyContainer("proxy.com", 6045, proxyType, "login", "p@ssword")
-            };
-
-            // Act
-            var actual = JsonConvert.SerializeObject(target);
-
-            // Assert
-            actual.Should().Be(JsonConvert.SerializeObject(
-                new
-                {
-                    type = "HCaptchaTask",
-                    websiteURL = target.WebsiteUrl,
-                    websiteKey = target.WebsiteKey,
-                    isInvisible = target.Invisible,
-                    data = target.Data,
-                    userAgent = default(string),
-                    cookies = "cookieA=value#A;cookieB=value#B",
-                    proxyAddress = target.ProxyAddress,
-                    proxyPort = target.ProxyPort,
-                    proxyType = proxyType.ToString().ToLower(),
-                    proxyLogin = target.ProxyLogin,
-                    proxyPassword = target.ProxyPassword
-                }));
-        }
 
         [Test]
         public void RecaptchaV3EnterpriseRequest__ShouldSerialize()

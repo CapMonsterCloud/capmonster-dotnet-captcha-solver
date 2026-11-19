@@ -108,16 +108,6 @@ namespace Zennolab.CapMonsterCloud
                     }
                 },
                 {
-                    typeof(HCaptchaRequest),
-                    new GetResultTimeouts
-                    {
-                        FirstRequestDelay = TimeSpan.FromSeconds(1),
-                        FirstRequestNoCacheDelay = TimeSpan.FromSeconds(10),
-                        RequestsInterval = TimeSpan.FromSeconds(3),
-                        Timeout = TimeSpan.FromSeconds(180)
-                    }
-                },
-                {
                     typeof(GeeTestRequest),
                     new GetResultTimeouts
                     {
@@ -194,15 +184,6 @@ namespace Zennolab.CapMonsterCloud
                     }
                 },
                 {
-                    typeof(TemuCustomTaskRequest),
-                    new GetResultTimeouts
-                    {
-                        FirstRequestDelay = TimeSpan.FromSeconds(1),
-                        RequestsInterval  = TimeSpan.FromSeconds(3),
-                        Timeout           = TimeSpan.FromSeconds(180)
-                    }
-                },
-                {
                     typeof(MTCaptchaTaskRequest),
                     new GetResultTimeouts
                     {
@@ -239,15 +220,6 @@ namespace Zennolab.CapMonsterCloud
                         FirstRequestDelay = TimeSpan.FromSeconds(1),
                         RequestsInterval  = TimeSpan.FromSeconds(2),
                         Timeout           = TimeSpan.FromSeconds(50)
-                    }
-                },
-                {
-                    typeof(CastleCustomTaskRequest),
-                    new GetResultTimeouts
-                    {
-                        FirstRequestDelay = TimeSpan.FromSeconds(1),
-                        RequestsInterval  = TimeSpan.FromSeconds(2),
-                        Timeout           = TimeSpan.FromSeconds(60)
                     }
                 },
                 {

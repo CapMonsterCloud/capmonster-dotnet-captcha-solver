@@ -335,53 +335,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
             actual.Should().BeEquivalentTo(expectedResult);
         }
         
-        [Test]
-        public async Task HCaptcha_ShouldSolve()
-        {
-            var clientKey = Gen.RandomString();
-            var taskId = Gen.RandomInt();
-
-            var captchaRequest = ObjectGen.HCaptcha.CreateHCaptchaTask();
-            var expectedResult = ObjectGen.HCaptcha.CreateSolution();
-
-            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
-            {
-                (
-                    Type: RequestType.CreateTask,
-                    ExpectedRequest: JsonConvert.SerializeObject(new
-                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
-                ),
-                (
-                    Type: RequestType.GetTaskResult,
-                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
-                ),
-            };
-
-            var captchaResults = new List<object>
-            {
-                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
-                new
-                {
-                    status = "ready",
-                    solution = new
-                    {
-                        respKey = expectedResult.Solution.RespKey,
-                        userAgent = expectedResult.Solution.UserAgent,
-                        gRecaptchaResponse = expectedResult.Solution.Value
-                    },
-                    errorId = 0,
-                    errorCode = (string)null!
-                }
-            };
-
-            var sut = new Sut(clientKey);
-            sut.SetupHttpServer(captchaResults);
-
-            var actual = await sut.SolveAsync(captchaRequest);
-
-            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
-            actual.Should().BeEquivalentTo(expectedResult);
-        }
         
         [Test]
         public async Task GeeTest_ShouldSolve()
@@ -626,99 +579,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
             actual.Should().BeEquivalentTo(expectedResult);
         }      
         
-        [Test]
-        public async Task HCaptchaComplexImageTaskWithNumericAnswer_ShouldSolve()
-        {
-            var clientKey = Gen.RandomString();
-            var taskId = Gen.RandomInt();
 
-            var captchaRequest = ObjectGen.ComplexImageTask.CreateHCaptchaComplexImageTask();
-            var expectedResult = ObjectGen.ComplexImageTask.CreateDynamicComplexImageTaskSolutionWithNumericAnswer();
-
-            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
-            {
-                (
-                    Type: RequestType.CreateTask,
-                    ExpectedRequest: JsonConvert.SerializeObject(new
-                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
-                ),
-                (
-                    Type: RequestType.GetTaskResult,
-                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
-                ),
-            };
-
-            var captchaResults = new List<object>
-            {
-                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
-                new
-                {
-                    status = "ready",
-                    solution = new
-                    {
-                        answer = expectedResult.Solution.Answer.NumericAnswer,
-                        metadata = new { AnswerType = "NumericArray" }
-                    },
-                    errorId = 0,
-                    errorCode = (string)null!
-                }
-            };
-
-            var sut = new Sut(clientKey);
-            sut.SetupHttpServer(captchaResults);
-
-            var actual = await sut.SolveAsync(captchaRequest);
-
-            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
-            actual.Should().BeEquivalentTo(expectedResult);
-        }
-
-        [Test]
-        public async Task HCaptchaComplexImageTaskWithGridAnswer_ShouldSolve()
-        {
-            var clientKey = Gen.RandomString();
-            var taskId = Gen.RandomInt();
-
-            var captchaRequest = ObjectGen.ComplexImageTask.CreateHCaptchaComplexImageTask();
-            var expectedResult = ObjectGen.ComplexImageTask.CreateDynamicComplexImageTaskSolutionWithGridAnswer();
-
-            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
-            {
-                (
-                    Type: RequestType.CreateTask,
-                    ExpectedRequest: JsonConvert.SerializeObject(new
-                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
-                ),
-                (
-                    Type: RequestType.GetTaskResult,
-                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
-                ),
-            };
-
-            var captchaResults = new List<object>
-            {
-                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
-                new
-                {
-                    status = "ready",
-                    solution = new
-                    {
-                        answer = expectedResult.Solution.Answer.GridAnswer,
-                        metadata = new { AnswerType = "Grid" }
-                    },
-                    errorId = 0,
-                    errorCode = (string)null!
-                }
-            };
-
-            var sut = new Sut(clientKey);
-            sut.SetupHttpServer(captchaResults);
-
-            var actual = await sut.SolveAsync(captchaRequest);
-
-            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
-            actual.Should().BeEquivalentTo(expectedResult);
-        }
 
         [Test]
         public async Task FunCaptchaComplexImageTask_ShouldSolve()
@@ -1142,51 +1003,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
             actual.Should().BeEquivalentTo(expectedResult);
         }
         
-        [Test]
-        public async Task Temu_ShouldSolve()
-        {
-            var clientKey = Gen.RandomString();
-            var taskId    = Gen.RandomInt();
-
-            var captchaRequest = ObjectGen.TemuTask.CreateTask();
-            var expectedResult = ObjectGen.TemuTask.CreateSolution();
-
-            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
-            {
-                (
-                    Type: RequestType.CreateTask,
-                    ExpectedRequest: JsonConvert.SerializeObject(new
-                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
-                ),
-                (
-                    Type: RequestType.GetTaskResult,
-                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
-                ),
-            };
-
-            var captchaResults = new List<object>
-            {
-                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
-                new
-                {
-                    status   = "ready",
-                    solution = new
-                    {
-                        domains = expectedResult.Solution.Domains
-                    },
-                    errorId = 0,
-                    errorCode = (string)null!
-                }
-            };
-
-            var sut = new Sut(clientKey);
-            sut.SetupHttpServer(captchaResults);
-
-            var actual = await sut.SolveAsync(captchaRequest);
-
-            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
-            actual.Should().BeEquivalentTo(expectedResult);
-        }
         
         [Test]
         public async Task MTCaptcha_ShouldSolve()
@@ -1478,52 +1294,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
             actual.Should().BeEquivalentTo(expectedResult);
         }
 
-        [Test]
-        public async Task Castle_ShouldSolve()
-        {
-            var clientKey = Gen.RandomString();
-            var taskId = Gen.RandomInt();
-
-            var captchaRequest = ObjectGen.CustomTask.CreateCastleTask();
-            var expectedResult = ObjectGen.CustomTask.CreateCastleSolution();
-
-            var expectedRequests = new List<(RequestType Type, string ExpectedRequest)>
-            {
-                (
-                    Type: RequestType.CreateTask,
-                    ExpectedRequest: JsonConvert.SerializeObject(new
-                        { clientKey = clientKey, task = captchaRequest, softId = 53 })
-                ),
-                (
-                    Type: RequestType.GetTaskResult,
-                    ExpectedRequest: JsonConvert.SerializeObject(new { clientKey = clientKey, taskId = taskId })
-                ),
-            };
-
-            var captchaResults = new List<object>
-            {
-                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
-                new
-                {
-                    status = "ready",
-                    solution = new
-                    {
-                        data = expectedResult.Solution.Data,
-                        domains = expectedResult.Solution.Domains
-                    },
-                    errorId = 0,
-                    errorCode = (string)null!
-                }
-            };
-
-            var sut = new Sut(clientKey);
-            sut.SetupHttpServer(captchaResults);
-
-            var actual = await sut.SolveAsync(captchaRequest);
-
-            sut.GetActualRequests().Should().BeEquivalentTo(expectedRequests);
-            actual.Should().BeEquivalentTo(expectedResult);
-        }
 
         [Test]
         public async Task Tspd_ShouldSolve()

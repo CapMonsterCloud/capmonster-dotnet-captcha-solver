@@ -36,12 +36,10 @@ namespace Zennolab.CapMonsterCloud.Client
         public void DictionaryToSemicolonSplittedStringConverter_ShouldDeserialize()
         {
             // Arrange
-            var request = new HCaptchaRequest()
+            var request = new RecaptchaV2Request()
             {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+                WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
                 WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
-                Invisible = false,
-                Data = "some data",
                 Cookies = new Dictionary<string, string>
                 {
                     { "cookieA", "value#A" },
@@ -52,7 +50,7 @@ namespace Zennolab.CapMonsterCloud.Client
             var target = JsonConvert.SerializeObject(request);
 
             // Act
-            var actual = JsonConvert.DeserializeObject<HCaptchaRequest>(target);
+            var actual = JsonConvert.DeserializeObject<RecaptchaV2Request>(target);
 
             // Assert
             _ = actual!.Cookies.Should().ContainKeys(request.Cookies.Keys);
@@ -66,8 +64,8 @@ namespace Zennolab.CapMonsterCloud.Client
             var target = JsonConvert.SerializeObject(
                 new
                 {
-                    type = "HCaptchaTask",
-                    websiteURL = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+                    type = "RecaptchaV2Task",
+                    websiteURL = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
                     websiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
                     isInvisible = false,
                     data = "some data",
@@ -76,7 +74,7 @@ namespace Zennolab.CapMonsterCloud.Client
                 });
 
             // Act
-            Func<HCaptchaRequest> act = () => JsonConvert.DeserializeObject<HCaptchaRequest>(target)!;
+            Func<RecaptchaV2Request> act = () => JsonConvert.DeserializeObject<RecaptchaV2Request>(target)!;
 
             // Assert
             _ = act.Should().Throw<JsonReaderException>();
