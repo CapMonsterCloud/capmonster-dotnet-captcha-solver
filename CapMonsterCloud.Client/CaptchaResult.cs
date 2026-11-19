@@ -17,5 +17,10 @@ namespace Zennolab.CapMonsterCloud
         /// Task result. Different for each type of task.
         /// </summary>
         public TSolution Solution { get; internal set; }
+
+        /// <summary>
+        /// Solution cost in US dollars (USD). Set only when the task was solved successfully, otherwise null.
+        /// </summary>
+        public double? Cost { get; internal set; }
     }
 }

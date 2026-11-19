@@ -16,8 +16,8 @@
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
     <PackageProjectUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</PackageProjectUrl>
-    <Version>4.1.0</Version>
-    <PackageReleaseNotes>Added FengkongCloud, ARCaptcha, HeyTap and Proton Captcha task requests. Default getTaskResult timeout raised from 80 to 180 seconds to match the backend.</PackageReleaseNotes>
+    <Version>4.1.1</Version>
+    <PackageReleaseNotes>Added Cost (solution cost in USD) to CaptchaResult, read from the getTaskResult response.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
