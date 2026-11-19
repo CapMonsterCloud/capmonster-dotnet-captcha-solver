@@ -275,7 +275,7 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 
 ## 🐞 Error Handling
 
-`SolveAsync` does not throw on API errors: it returns a `CaptchaResult<TSolution>` where one of the two properties is set — `Solution` (the typed solution on success) or `Error` (`ErrorType` on failure).
+`SolveAsync` does not throw on API errors: it returns a `CaptchaResult<TSolution>` where one of the two properties is set — `Solution` (the typed solution on success) or `Error` (`ErrorType` on failure). On success the result also carries `Cost` — the price of this solution in USD.
 
 | `ErrorType` | Meaning |
 | :--- | :--- |
@@ -301,6 +301,7 @@ if (result.Error is ErrorType error)
 else
 {
     Console.WriteLine($"Token: {result.Solution.GRecaptchaResponse}");
+    Console.WriteLine($"Cost: {result.Cost}"); // price of this solution in USD
 }
 ```
 
