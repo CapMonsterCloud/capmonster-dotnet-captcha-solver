@@ -97,7 +97,7 @@ namespace Zennolab.CapMonsterCloud
                             case TaskResult.TaskFailed failed:
                                 return new CaptchaResult<TSolution> { Error = failed.Error };
                             case TaskResult.TaskCompleted completed:
-                                return new CaptchaResult<TSolution> { Solution = CastSolution<TSolution>(completed.Solution) };
+                                return new CaptchaResult<TSolution> { Solution = CastSolution<TSolution>(completed.Solution), Cost = completed.Cost };
                             case TaskResult.TaskInProgress inProgress:
                             default:
                                 break;
@@ -194,7 +194,7 @@ namespace Zennolab.CapMonsterCloud
 
             if (TaskReady.Equals(result.status, StringComparison.OrdinalIgnoreCase))
             {
-                return TaskResult.Completed(result.solution);
+                return TaskResult.Completed(result.solution, result.cost);
             }
 
             return TaskResult.InProgress;

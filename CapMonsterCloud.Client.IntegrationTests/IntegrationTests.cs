@@ -85,6 +85,41 @@ namespace CapMonsterCloud.Client.IntegrationTests
         }
         
         [Test]
+        public async Task ImageToText_ShouldReturnCost_WhenReadyResponseContainsCost()
+        {
+            var clientKey = Gen.RandomString();
+            var taskId = Gen.RandomInt();
+            var cost = 0.0003m;
+
+            var captchaRequest = ObjectGen.ImageToText.CreateTask();
+            var expectedSolution = ObjectGen.ImageToText.CreateSolution();
+
+            var captchaResults = new List<object>
+            {
+                new { taskId = taskId, errorId = 0, errorCode = (string)null! },
+                new
+                {
+                    status = "ready",
+                    cost = cost,
+                    solution = new
+                    {
+                        text = expectedSolution.Solution.Value
+                    },
+                    errorId = 0,
+                    errorCode = (string)null!
+                }
+            };
+
+            var sut = new Sut(clientKey);
+            sut.SetupHttpServer(captchaResults);
+
+            var actual = await sut.SolveAsync(captchaRequest);
+
+            actual.Cost.Should().Be(cost);
+            actual.Solution.Should().BeEquivalentTo(expectedSolution.Solution);
+        }
+
+        [Test]
         public async Task RecaptchaV2_ShouldSolve()
         {
             var clientKey = Gen.RandomString();
