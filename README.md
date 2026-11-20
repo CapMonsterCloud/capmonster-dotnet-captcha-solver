@@ -93,9 +93,8 @@ The package targets .NET Standard 2.0.
 Create an API key in the [CapMonster Cloud Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme), then initialize the client:
 
 ```csharp
-using Zennolab.CapMonsterCloud.Client;
-using Zennolab.CapMonsterCloud.Client.Options;
-using Zennolab.CapMonsterCloud.Client.Requests;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
 var clientOptions = new ClientOptions
 {
@@ -120,7 +119,7 @@ var recaptchaV2Request = new RecaptchaV2Request
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(recaptchaV2Request);
+var result = await cmCloudClient.SolveAsync(recaptchaV2Request, CancellationToken.None);
 Console.WriteLine($"Solved token: {result.Solution.GRecaptchaResponse}");
 ```
 
@@ -142,7 +141,37 @@ var tspdRequest = new TspdCustomTaskRequest(
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(tspdRequest);
+var result = await cmCloudClient.SolveAsync(tspdRequest, CancellationToken.None);
+```
+
+### 4. Check your balance
+
+`GetBalanceAsync` returns the account balance in USD:
+
+```csharp
+decimal balance = await cmCloudClient.GetBalanceAsync(CancellationToken.None);
+Console.WriteLine($"Balance: {balance}");
+```
+
+---
+
+## 🔧 Client Configuration
+
+`ClientOptions` (namespace `Zennolab.CapMonsterCloud`) controls how the client connects to the CapMonster Cloud API:
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `ClientKey` | — | **Required.** Your CapMonster Cloud API key from the [Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=dotnet_repo_readme). |
+| `ServiceUri` | `https://api.capmonster.cloud` | CapMonster Cloud API endpoint. |
+| `SoftId` | `53` | `softId` sent with every created task; identifies your software in the Dashboard. |
+
+```csharp
+var clientOptions = new ClientOptions
+{
+    ClientKey = "YOUR_CAPMONSTER_CLOUD_API_KEY",
+    ServiceUri = new Uri("https://api.capmonster.cloud"),
+    SoftId = 12345
+};
 ```
 
 ---
@@ -173,9 +202,8 @@ CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you ca
 
 ```csharp
 // After: CapMonster Cloud
-using Zennolab.CapMonsterCloud.Client;
-using Zennolab.CapMonsterCloud.Client.Options;
-using Zennolab.CapMonsterCloud.Client.Requests;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
 var cmCloudClient = CapMonsterCloudClientFactory.Create(
     new ClientOptions { ClientKey = "YOUR_CAPMONSTER_CLOUD_API_KEY" });
@@ -192,7 +220,7 @@ var request = new RecaptchaV2Request
         "password")
 };
 
-var result = await cmCloudClient.SolveAsync(request);
+var result = await cmCloudClient.SolveAsync(request, CancellationToken.None);
 var token = result.Solution.GRecaptchaResponse;
 ```
 
@@ -212,13 +240,16 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 
 | Task family | Example request classes in this SDK |
 | :--- | :--- |
-| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest`, `RecaptchaV3ProxylessRequest`, `RecaptchaV3EnterpriseRequest` |
+| **reCAPTCHA** | `RecaptchaV2Request`, `RecaptchaV2EnterpriseRequest` (optional `MinScore`, 0.1–0.9), `RecaptchaV3ProxylessRequest`, `RecaptchaV3EnterpriseRequest` |
 | **Cloudflare Turnstile** | `TurnstileRequest` |
 | **GeeTest** | `GeeTestRequest` |
+| **FunCaptcha** | `FunCaptchaRequest` |
 | **Amazon WAF** | `AmazonWafRequest` |
+| **Binance CAPTCHA** | `BinanceTaskRequest` |
+| **ARCaptcha** | `ArCaptchaTaskRequest` |
 | **Image-to-Text** | `ImageToTextRequest` |
 | **Complex image tasks** | `RecaptchaComplexImageTaskRequest`, `RecognitionComplexImageTaskRequest` |
-| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, `FengkongCloudCustomTaskRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest`, and other supported custom-task classes |
+| **Custom anti-bot tasks** | `DataDomeCustomTaskRequest`, `ImpervaCustomTaskRequest`, `TspdCustomTaskRequest`, `FengkongCloudCustomTaskRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest`, `AltchaCustomTaskRequest`, `AlibabaCustomTaskRequest`, `BasiliskCustomTaskRequest`, `TenDiCustomTaskRequest`, `FriendlyCustomTaskRequest`, `HuntCustomTaskRequest`, `MTCaptchaTaskRequest`, `ProsopoTaskRequest`, `YidunTaskRequest` |
 
 ---
 
@@ -239,6 +270,42 @@ All task types follow the official [CapMonster Cloud API documentation](https://
          ▼
 [ Receive Token & Autosubmit ] ──► Complete bypass
 ```
+
+---
+
+## 🐞 Error Handling
+
+`SolveAsync` does not throw on API errors: it returns a `CaptchaResult<TSolution>` where one of the two properties is set — `Solution` (the typed solution on success) or `Error` (`ErrorType` on failure). On success the result also carries `Cost` — the price of this solution in USD.
+
+| `ErrorType` | Meaning |
+| :--- | :--- |
+| `Timeout` | Captcha recognition timeout expired before a solution arrived. |
+| `KEY_DOES_NOT_EXIST`, `ZERO_BALANCE`, `IP_BANNED`, `CAPTCHA_UNSOLVABLE`, `TOO_MUCH_REQUESTS`, and similar | API error codes, mapped from the API `errorCode` strings (e.g. `ERROR_ZERO_BALANCE` → `ZERO_BALANCE`). |
+| `Unknown` | An unrecognized API error. |
+
+Other failure modes raise exceptions:
+
+| Exception | Raised when |
+| :--- | :--- |
+| `GetBalanceException` | `GetBalanceAsync` failed. |
+| `CapmonsterCloudClientException` | Base class for client exceptions. |
+| `OperationCanceledException` | The provided `CancellationToken` was cancelled. |
+
+```csharp
+var result = await cmCloudClient.SolveAsync(recaptchaV2Request, CancellationToken.None);
+
+if (result.Error is ErrorType error)
+{
+    Console.WriteLine($"Solve failed: {error}");
+}
+else
+{
+    Console.WriteLine($"Token: {result.Solution.GRecaptchaResponse}");
+    Console.WriteLine($"Cost: {result.Cost}"); // price of this solution in USD
+}
+```
+
+**Polling and timeouts.** The client polls `getTaskResult` automatically with per-captcha-type settings (delay before the first request, polling interval, maximum waiting time — up to 180 seconds for token tasks). If no solution arrives in time, `SolveAsync` returns `ErrorType.Timeout`. Unsolved tasks are not charged.
 
 ---
 

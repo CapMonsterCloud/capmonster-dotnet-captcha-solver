@@ -162,40 +162,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
             }
         }
         
-        public static class HCaptcha
-        {
-            public static HCaptchaRequest CreateHCaptchaTask()
-            {
-                return new HCaptchaRequest
-                {
-                    WebsiteUrl = Gen.RandomUri().ToString(),
-                    WebsiteKey = Gen.RandomGuid(),
-                    Invisible = Gen.RandomBool(),
-                    Data = Gen.RandomString(),
-#pragma warning disable CS0618
-                    UserAgent = Gen.UserAgent(),
-#pragma warning restore CS0618
-                    FallbackToActualUA = Gen.RandomBool(),
-                    Cookies = Gen.ListOfValues(Gen.RandomString).ToDictionary(_ => Gen.RandomString(), value => value),
-                    NoCache = Gen.RandomBool(),
-                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
-                };
-            }
-
-            public static CaptchaResult<HCaptchaResponse> CreateSolution()
-            {
-                return new CaptchaResult<HCaptchaResponse>
-                {
-                    Error = null,
-                    Solution = new HCaptchaResponse
-                    {
-                        RespKey = Gen.RandomString(),
-                        UserAgent = Gen.UserAgent(),
-                        Value = Gen.RandomString(),
-                    }
-                };
-            }
-        }
         
         public static class GeeTest
         {
@@ -325,22 +291,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
                 };
             }
             
-            public static HCaptchaComplexImageTaskRequest CreateHCaptchaComplexImageTask()
-            {
-                return new HCaptchaComplexImageTaskRequest
-                {
-                    WebsiteUrl = Gen.RandomUri().ToString(),
-                    Metadata = new HCaptchaComplexImageTaskRequest.HCaptchaMetadata()
-                    {
-                        Task = Gen.RandomString(),
-                    },
-                    ImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
-                    ImagesBase64 = Gen.ListOfValues(Gen.RandomString),
-                    ExampleImageUrls = Gen.ListOfValues(Gen.RandomUri().ToString),
-                    ExampleImagesBase64 = Gen.ListOfValues(Gen.RandomString),
-                    UserAgent = Gen.UserAgent()
-                };
-            }
             
             public static FunCaptchaComplexImageTaskRequest CreateFunCaptchaComplexImageTask()
             {
@@ -658,41 +608,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
                 };
             }
 
-            public static CastleCustomTaskRequest CreateCastleTask()
-            {
-                return new CastleCustomTaskRequest(Gen.RandomUri().ToString(), Gen.RandomUri().ToString(), Gen.RandomInt(1, 49))
-                {
-                    WebsiteKey = Gen.RandomGuid(),
-                    WebsiteUrl = Gen.RandomUri().ToString(),
-                    UserAgent = Gen.UserAgent(),
-                    Proxy = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
-                };
-            }
-
-            public static CaptchaResult<CustomTaskResponse> CreateCastleSolution()
-            {
-                return new CaptchaResult<CustomTaskResponse>
-                {
-                    Error = null,
-                    Solution = new CustomTaskResponse
-                    {
-                        Domains = new Dictionary<string, CustomTaskResponse.DomainInfo>
-                        {
-                            {
-                                Gen.RandomString(),
-                                new CustomTaskResponse.DomainInfo()
-                                {
-                                    Cookies = new Dictionary<string, string> { { "__cuid", Gen.RandomGuid() } }
-                                }
-                            }
-                        },
-                        Data = new Dictionary<string, string>
-                        {
-                            { "tokens", Gen.RandomString() }
-                        }
-                    }
-                };
-            }
 
             public static TspdCustomTaskRequest CreateTspdTask()
             {
@@ -822,43 +737,6 @@ namespace CapMonsterCloud.Client.IntegrationTests
             }
         }
 
-        public static class TemuTask
-        {
-            public static TemuCustomTaskRequest CreateTask()
-            {
-                return new TemuCustomTaskRequest(Gen.RandomString())
-                {
-                    WebsiteUrl = Gen.RandomUri().ToString(),
-                    UserAgent  = Gen.UserAgent(),
-                    Proxy      = new ProxyContainer(Gen.RandomString(), Gen.RandomInt(1, 65535), Gen.RandomEnum<ProxyType>(), Gen.RandomString(), Gen.RandomString())
-                };
-            }
-
-            public static CaptchaResult<CustomTaskResponse> CreateSolution()
-            {
-                return new CaptchaResult<CustomTaskResponse>
-                {
-                    Error = null,
-                    Solution = new CustomTaskResponse
-                    {
-                        Domains = new Dictionary<string, CustomTaskResponse.DomainInfo>
-                        {
-                            {
-                                "www.temu.com",
-                                new CustomTaskResponse.DomainInfo
-                                {
-                                    Cookies = new Dictionary<string, string>
-                                    {
-                                        { "verifyAuthToken", Gen.RandomString() },
-                                        { "api_uid",         Gen.RandomString() }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                };
-            }
-        }
         
         public static class MTCaptchaTask
         {
