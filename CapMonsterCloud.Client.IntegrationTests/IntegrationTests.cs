@@ -89,7 +89,7 @@ namespace CapMonsterCloud.Client.IntegrationTests
         {
             var clientKey = Gen.RandomString();
             var taskId = Gen.RandomInt();
-            var cost = 0.0003;
+            var cost = 0.0003m;
 
             var captchaRequest = ObjectGen.ImageToText.CreateTask();
             var expectedSolution = ObjectGen.ImageToText.CreateSolution();

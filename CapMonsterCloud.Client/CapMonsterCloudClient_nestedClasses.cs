@@ -35,7 +35,7 @@ namespace Zennolab.CapMonsterCloud
 
             public object solution { get; set; }
 
-            public double? cost { get; set; }
+            public decimal? cost { get; set; }
 #pragma warning restore IDE1006 // Naming Styles
         }
 
@@ -58,7 +58,7 @@ namespace Zennolab.CapMonsterCloud
 
             public class TaskCompleted : TaskResult
             {
-                public TaskCompleted(object solution, double? cost = null)
+                public TaskCompleted(object solution, decimal? cost = null)
                 {
                     this.Solution = solution;
                     this.Cost = cost;
@@ -66,14 +66,14 @@ namespace Zennolab.CapMonsterCloud
 
                 public object Solution { get; }
 
-                public double? Cost { get; }
+                public decimal? Cost { get; }
             }
 
             public static TaskInProgress InProgress { get; } = new TaskInProgress();
 
             public static TaskFailed Failed(ErrorType error) => new TaskFailed(error);
 
-            public static TaskCompleted Completed(object solution, double? cost = null) => new TaskCompleted(solution, cost);
+            public static TaskCompleted Completed(object solution, decimal? cost = null) => new TaskCompleted(solution, cost);
         }
 
         private class CreateTaskRequest<TSolution> where TSolution : CaptchaResponseBase

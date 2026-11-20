@@ -21,6 +21,6 @@ namespace Zennolab.CapMonsterCloud
         /// <summary>
         /// Solution cost in US dollars (USD). Set only when the task was solved successfully, otherwise null.
         /// </summary>
-        public double? Cost { get; internal set; }
+        public decimal? Cost { get; internal set; }
     }
 }
