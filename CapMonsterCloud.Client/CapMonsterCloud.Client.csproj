@@ -6,18 +6,18 @@
     <RootNamespace>Zennolab.CapMonsterCloud</RootNamespace>
     <Company>CapMonster Cloud</Company>
     <Authors>CapMonster Cloud</Authors>
-    <Description>Official CapMonster Cloud C# and .NET SDK: captcha solver and captcha bypass for reCAPTCHA, Cloudflare Turnstile, DataDome and GeeTest. A 2captcha and capsolver alternative.</Description>
+    <Description>Official CapMonster Cloud C# and .NET SDK: captcha solver and captcha bypass for reCAPTCHA v2/v3/Enterprise, Cloudflare Turnstile, DataDome, GeeTest, Amazon WAF, FunCaptcha and 20+ captcha types. A 2captcha and capsolver alternative.</Description>
     <Copyright>CapMonster Cloud, 2026</Copyright>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>capmonster capmonster-cloud captcha captcha-solver captcha-bypass recaptcha cloudflare-turnstile geetest datadome web-scraping 2captcha-alternative capsolver-alternative</PackageTags>
+    <PackageTags>capmonster capmonster-cloud captcha captcha-solver captcha-bypass recaptcha cloudflare-turnstile geetest datadome amazon-waf funcaptcha imperva binance web-scraping 2captcha-alternative capsolver-alternative</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</RepositoryUrl>
     <PackageProjectUrl>https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver</PackageProjectUrl>
-    <Version>4.1.0</Version>
-    <PackageReleaseNotes>Added FengkongCloud, ARCaptcha, HeyTap and Proton Captcha task requests. Added optional MinScore parameter to RecaptchaV2EnterpriseRequest. Added Cost (solution cost in USD) to CaptchaResult, read from the getTaskResult response. Default getTaskResult timeout raised from 80 to 180 seconds to match the backend.</PackageReleaseNotes>
+    <Version>4.1.1</Version>
+    <PackageReleaseNotes>Package description and keywords now list the full range of supported captcha types.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
